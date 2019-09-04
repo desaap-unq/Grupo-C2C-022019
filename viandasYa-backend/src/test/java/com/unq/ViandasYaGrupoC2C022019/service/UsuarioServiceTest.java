@@ -1,13 +1,13 @@
 package com.unq.ViandasYaGrupoC2C022019.service;
 
-import com.unq.ViandasYaGrupoC2C022019.ViandasYaGrupoC2C022019ApplicationTests;
+import com.unq.ViandasYaGrupoC2C022019.ApplicationTests;
 import com.unq.ViandasYaGrupoC2C022019.model.Usuario;
 import java.util.List;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class UsuarioServiceTest extends ViandasYaGrupoC2C022019ApplicationTests {
+public class UsuarioServiceTest extends ApplicationTests {
 
     @Autowired
     private UsuarioService usuarioService;
