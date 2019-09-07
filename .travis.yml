@@ -9,4 +9,4 @@ deploy:
  - provider: heroku
    skip_cleanup: true
    api-key: c399f4fc-b99c-45a9-baae-61dc1c27349f
-   app: app-grupoc2c-2019
+   on: develop
