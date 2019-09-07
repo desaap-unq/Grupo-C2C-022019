@@ -5,7 +5,7 @@ CREATE TABLE usuario (
     id BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(45),
     apellido VARCHAR(45),
-    fecha_de_nacimiento DATETIME,
+    fecha_de_nacimiento DATETIME
     
 );
 
