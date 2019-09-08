@@ -2,22 +2,35 @@ package com.unq.ViandasYaGrupoC2C022019.model;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
-public class AccountTest {
-
-	@Before
-	public void setUp() throws Exception {
-	}
+public class ClientTest {
 
 	@Test
 	public void testCreateAccount_APerson() {
-		Account client = new Account("Gabriel", "Guzman", "gabriel.guzman@alu.unq.edu.ar", 1515151515, "Banfield", "Laprida 458", true);
+		Client client = new Client("Gabriel", "Guzman", "gabriel.guzman@alu.unq.edu.ar", 1515151515, "Banfield", "Laprida 458");
 		
 		assertEquals(client.getName(), "Gabriel");
-		assertTrue(client.isClient());
-		assertFalse(client.isBusiness());
+		assertEquals(client.getBalance(), 0.0, 0.000);
+	}
+	
+	@Test
+	public void testCreateAccount_APersonBuilderWithName() {
+		Client aClient = ClientBuilder.aClient()
+						.withName("Gabriel")
+						.build();
+		
+		assertEquals(aClient.getName(), "Gabriel");
+	}
+	
+	@Test
+	public void testCreateAccountWithCash_APersonBuilder() {
+		Client aClient = ClientBuilder.aClient()
+						.build();
+		
+		aClient.chargeCash(15.2);
+
+		assertEquals(aClient.getBalance(), 15.2, 0.000);
 	}
 	
 	@Test

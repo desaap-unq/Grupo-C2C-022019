@@ -12,7 +12,7 @@ public class BusinessBuilder {
 	private int phone = 151515;
 	
 	public Business build() {
-		Business aBusiness = new Business(name, logo, locality, phone);
+		Business aBusiness = new Business(name, logo, locality, locality, locality, locality, locality, locality, phone, locality, locality, locality);
 		return aBusiness;
 	}
 	
