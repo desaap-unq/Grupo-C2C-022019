@@ -10,7 +10,11 @@ public class Account {
 	private String address;
 	private boolean client;
 	
+	private String logo;
+	private boolean business;
+	
 	public Account(String name, String surname, String email, int phone, String locality, String address, boolean client) {
+		// constructor Client
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
@@ -19,6 +23,15 @@ public class Account {
 		this.address = address;
 		this.client = client;
 		// validate data
+	}
+
+	public Account(String name, String logo, String locality, int phone, boolean business) {
+		// constructor Business
+		this.name = name;
+		this.logo = logo;
+		this.locality = locality;
+		this.phone = phone;
+		this.business = business;
 	}
 
 	public String getName() {
@@ -75,6 +88,22 @@ public class Account {
 
 	public void setClient(boolean client) {
 		this.client = client;
+	}
+
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+
+	public boolean isBusiness() {
+		return business;
+	}
+
+	public void setBusiness(boolean business) {
+		this.business = business;
 	}
 
 

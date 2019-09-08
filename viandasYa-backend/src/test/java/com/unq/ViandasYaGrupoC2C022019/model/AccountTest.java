@@ -17,11 +17,20 @@ public class AccountTest {
 		
 		assertEquals(client.getName(), "Gabriel");
 		assertTrue(client.isClient());
+		assertFalse(client.isBusiness());
 	}
 	
 	@Test
 	public void voidCreateAccount_ABusiness() {
-		// builder business
+		Business aBusiness = BusinessBuilder.aBusiness()
+							.withName("McDonalds")
+							.build();
+		
+		Account business = new Account(aBusiness.getName(), aBusiness.getLogo(), aBusiness.getLocality(), aBusiness.getPhone(), true);
+		
+		assertEquals(business.getName(), "McDonalds");
+		assertTrue(business.isBusiness());
+		assertFalse(business.isClient());
 	}
 
 }
