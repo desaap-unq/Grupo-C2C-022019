@@ -148,5 +148,4 @@ public class Business {
 		this.wallet.sale(amount);
 	}
 	
-	
 }

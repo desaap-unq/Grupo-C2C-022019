@@ -34,4 +34,8 @@ public class VirtualWallet {
 		this.balance += amount;
 	}
 
+	public void buy(double amount) {
+		this.balance -= amount;
+	}
+
 }

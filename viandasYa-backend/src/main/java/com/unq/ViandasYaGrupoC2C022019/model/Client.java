@@ -83,6 +83,11 @@ public class Client {
 	public void chargeCash(double amount) {
 		this.wallet.chargeCash(amount);
 	}
+
+	public void buyMenu(double amount) {
+		// change amount 4 Menu
+		this.wallet.buy(amount);
+	}
 	
 	
 

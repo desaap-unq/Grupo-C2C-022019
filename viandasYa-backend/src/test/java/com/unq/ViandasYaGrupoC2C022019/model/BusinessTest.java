@@ -11,7 +11,7 @@ public class BusinessTest {
 		Business business = new Business("Empanadas Dorita", "logo", "Lanus", "Av San Martin 3192", "Google Use", "Empandas de todo tipo", "facebook", "no-resp@gmail.com", 151515, "10 - 18", "lunes a viernes", "1km cerca de la estacion");
 	
 		assertEquals(business.getName(), "Empanadas Dorita");
-		assertEquals(business.getBalance(), 0.0, 0);
+		assertEquals(business.getBalance(), 0.0, .3);
 	}
 	
 	@Test
@@ -28,12 +28,22 @@ public class BusinessTest {
 		Business aBusiness = BusinessBuilder.aBusiness()
 							.build();
 		
-		// example - sale
+		// example - sale menu
 		aBusiness.sale(99.85);
 		
-//		double cash = aBusiness.removeAllCash();
+		assertEquals(aBusiness.getBalance(), 99.85, .3);
+	}
+	
+	@Test
+	public void testSale_RemoveCash_ABusinessBuilder() {
+		Business aBusiness = BusinessBuilder.aBusiness()
+							.build();
 		
-		assertEquals(aBusiness.getBalance(), 99.85, 0.000);
+		// example - sale menu
+		aBusiness.sale(99.85);
+		aBusiness.removeAllCash();
+		
+		assertEquals(aBusiness.getBalance(), 0.0, .3);
 	}
 
 }
