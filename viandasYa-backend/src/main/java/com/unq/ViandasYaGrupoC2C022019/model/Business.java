@@ -139,6 +139,14 @@ public class Business {
 	public double getBalance() {
 		return this.wallet.getBalance();
 	}
+
+	public double removeAllCash() {
+		return this.wallet.removeAllCash();
+	}
+
+	public void sale(double amount) {
+		this.wallet.sale(amount);
+	}
 	
 	
 }

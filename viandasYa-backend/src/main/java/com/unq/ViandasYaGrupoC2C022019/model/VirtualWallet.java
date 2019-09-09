@@ -24,4 +24,14 @@ public class VirtualWallet {
 		this.balance += amount;
 	}
 
+	public double removeAllCash() {
+		double cash = this.balance;
+		this.balance = 0;
+		return cash;
+	}
+
+	public void sale(double amount) {
+		this.balance += amount;
+	}
+
 }
