@@ -6,8 +6,8 @@ public class Client {
 	private String surname;
 	private String email;
 	private int phone;
-	private String locality;
-	private String address;
+	private String locality; // gmaps
+	private String address;  //  ""
 	private VirtualWallet wallet;
 
 	public Client(String name, String surname, String email, int phone, String locality, String address) {

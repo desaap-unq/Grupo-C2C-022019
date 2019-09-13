@@ -1,5 +1,7 @@
 package com.unq.ViandasYaGrupoC2C022019.model;
 
+import com.unq.ViandasYaGrupoC2C022019.model.exception.InsufficientBalanceException;
+
 public class VirtualWallet {
 
 	private double balance;
@@ -35,7 +37,19 @@ public class VirtualWallet {
 	}
 
 	public void buy(double amount) {
+		if((balance - amount) < 0) {
+			throw new InsufficientBalanceException(amount);
+		}
 		this.balance -= amount;
+	}
+
+	public double removeCash(double amount) {
+		if((balance - amount) < 0) {
+			throw new InsufficientBalanceException(amount);
+		}
+		double cash = this.balance;
+		this.balance = 0;
+		return cash;
 	}
 
 }

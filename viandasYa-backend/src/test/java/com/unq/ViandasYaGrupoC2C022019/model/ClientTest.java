@@ -44,5 +44,17 @@ public class ClientTest {
 		
 		assertEquals(aClient.getBalance(), 0.8, .3);
 	}
+	
+	@Test (expected = RuntimeException.class)
+	public void testBuyMenu_InsufficientBalance2Buy() {
+		Client aClient = ClientBuilder.aClient()
+				.build();
+		
+		aClient.chargeCash(16);
+		assertEquals(aClient.getBalance(), 16.0, .3);
+		
+		aClient.buyMenu(20.23);
+		
+	}
 
 }

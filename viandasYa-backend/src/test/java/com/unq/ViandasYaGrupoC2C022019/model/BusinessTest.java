@@ -39,11 +39,22 @@ public class BusinessTest {
 		Business aBusiness = BusinessBuilder.aBusiness()
 							.build();
 		
-		// example - sale menu
 		aBusiness.sale(99.85);
 		aBusiness.removeAllCash();
 		
 		assertEquals(aBusiness.getBalance(), 0.0, .3);
+	}
+	
+	@Test(expected = RuntimeException.class)
+	public void testRemoveCash_NoBalanceInFavor() {
+		Business aBusiness = BusinessBuilder.aBusiness()
+				.build();
+		
+		aBusiness.sale(99.85);
+		assertEquals(aBusiness.getBalance(), 99.85, .3);
+
+		aBusiness.removeCash(100);
+		
 	}
 
 }

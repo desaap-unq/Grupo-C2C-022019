@@ -6,8 +6,8 @@ public class Business {
 	private String logo;
 	private String locality;
 	private int phone;
-	private String address;
-	private String location;
+	private String address;		// gmaps
+	private String location;	//  ""
 	private String description;
 	private String link;
 	private String email;
@@ -146,6 +146,10 @@ public class Business {
 
 	public void sale(double amount) {
 		this.wallet.sale(amount);
+	}
+
+	public double removeCash(int amount) {
+		return this.wallet.removeCash(amount);
 	}
 	
 }
