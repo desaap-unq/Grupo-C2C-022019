@@ -1,26 +1,67 @@
 import React from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
+import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const coords = {
+  // UNQ - location
+  // BROWSER=chrome npm start | choose browser
+  lat: -34.7060043,
+  lng: -58.2795471
+};
+
+const params = {v: '3.exp', key: 'AIzaSyDvyWNowgJeTKhvWLI51IH8l04AEMDljzY'};
+                          // indian key AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo
+class App extends React.Component {
+
+  onMapCreated(map) {
+    map.setOptions({
+      disableDefaultUI: true
+    });
+  }
+
+  onDragEnd(e) {
+    console.log('onDragEnd', e);
+  }
+
+  onCloseClick() {
+    console.log('onCloseClick');
+  }
+
+  onClick(e) {
+    console.log('onClick', e);
+  }
+
+  render() {
+    return (
+      <Gmaps
+        width={'800px'}
+        height={'600px'}
+        lat={coords.lat}
+        lng={coords.lng}
+        zoom={12}
+        loadingMessage={'Be happy'}
+        params={params}
+        onMapCreated={this.onMapCreated}>
+        <Marker
+          lat={coords.lat}
+          lng={coords.lng}
+          draggable={true}
+          onDragEnd={this.onDragEnd} />
+        <InfoWindow
+          lat={coords.lat}
+          lng={coords.lng}
+          content={'Hello, React :)'}
+          onCloseClick={this.onCloseClick} />
+        <Circle
+          lat={coords.lat}
+          lng={coords.lng}
+          radius={500}
+          onClick={this.onClick} />
+      </Gmaps>
+    );
+  }
+
+};
 
 export default App;
