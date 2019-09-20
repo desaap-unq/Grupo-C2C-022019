@@ -6,12 +6,11 @@ import {Gmaps, Marker, InfoWindow, Circle} from 'react-gmaps';
 const coords = {
   // UNQ - location
   // BROWSER=chrome npm start | choose browser
-  lat: -34.7060043,
-  lng: -58.2795471
+  lat: -34.706501,
+  lng: -58.2807187
 };
 
-const params = {v: '3.exp', key: 'AIzaSyDvyWNowgJeTKhvWLI51IH8l04AEMDljzY'};
-                          // indian key AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo
+const params = {v: '3.exp', key: 'AIzaSyCk9lUgqQBF_EojnEsDkspDDp-ozqf1rnA'};
 class App extends React.Component {
 
   onMapCreated(map) {
