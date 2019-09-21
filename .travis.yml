@@ -13,6 +13,8 @@ matrix:
     cache: 
      directories:
       - node_modules
+    before_script:
+     - cd viandasya-frontend
     script:
     - npm test
     - npm run build
