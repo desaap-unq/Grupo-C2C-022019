@@ -50,7 +50,7 @@ class App extends React.Component {
         <InfoWindow
           lat={coords.lat}
           lng={coords.lng}
-          content={'Hello, React :)'}
+          content={'Hello, Google :)'}
           onCloseClick={this.onCloseClick} />
         <Circle
           lat={coords.lat}
