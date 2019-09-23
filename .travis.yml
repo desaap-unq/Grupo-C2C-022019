@@ -1,18 +1,24 @@
-language: java
-jdk:
- - oraclejdk8
-node_js: "stable"
-cache:
- directories:
-  - node_modules
-install:
- - cd viandasYa-backend && mvn clean install -Dmaven.compiler.target=1.8 -Dmaven.compiler.source=1.8
-before_script:
- - cd viandasya-frontend
- - npm install
-script:
- - npm test
- - npm run build
+matrix:
+ include:
+    - language: node_js
+      node_js:
+       - "stable"
+      cache: 
+       directories:
+        - node_modules
+      before_script:
+       - cd viandasya-frontend
+       - npm install
+      script:
+       - npm test
+       - npm run build
+    - language: java
+      dist: trusty
+      sudo: required
+      jdk:
+      - oraclejdk8
+      install:
+      - cd viandasYa-backend && mvn clean install -Dmaven.compiler.target=1.8 -Dmaven.compiler.source=1.8
 deploy:
  - provider: heroku
    skip_cleanup: true
