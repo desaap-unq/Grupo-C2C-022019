@@ -1,3 +1,5 @@
+dist: trusty
+sudo: required
 matrix:
  include:
     - language: node_js
@@ -13,8 +15,6 @@ matrix:
        - npm test
        - npm run build
     - language: java
-      dist: trusty
-      sudo: required
       jdk:
       - oraclejdk8
       install:
