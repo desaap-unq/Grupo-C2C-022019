@@ -8,18 +8,42 @@ class Menu {
     private String name; 
     private String description;
     private List<MenuCategory> category; 
-    private Double deliveryCost;
+    private double deliveryCost;
     private LocalDate startDate; 
     private LocalDate dueDate;
-    private LocalTime horarioDeEntrega;
+    private LocalTime deliveryTime;
     private LocalTime averageDeliveryTime; 
-    private Double price; 
+    private double price; 
     private int minimumQuantity;
-    private Double minimumQuantityPrice;
+    private double minimumQuantityPrice;
     private int minimumQuantitytwo;
-    private  Double minimumQuantityPriceTwo;
+    private double minimumQuantityPriceTwo;
     private int maximumAmountSalesPerDay;
 
+    public Menu(String name, String description, List<MenuCategory> category,
+                Double deliveryCost, LocalDate startDate, LocalDate dueDate, 
+                LocalTime deliveryTime, LocalTime averageDeliveryTime, Double price,
+                int minimumQuantity, Double minimumQuantityPrice, int minimumQuantitytwo,
+                Double minimumQuantityPriceTwo, int maximumAmountSalesPerDay) {
+        
+        this.name = name;
+        this.description = description;
+        this.category = category;
+        this.deliveryCost = deliveryCost;
+        this.startDate = startDate;
+        this.dueDate = dueDate;
+        this.deliveryTime = deliveryTime;
+        this.averageDeliveryTime = averageDeliveryTime;
+        this.price = price;
+        this.minimumQuantity = minimumQuantity;
+        this.minimumQuantityPrice = minimumQuantityPrice;
+        this.minimumQuantitytwo = minimumQuantitytwo;
+        this.minimumQuantityPriceTwo = minimumQuantityPriceTwo;
+        this.maximumAmountSalesPerDay = maximumAmountSalesPerDay;
+    }
+
+    public Menu(){}
+    
     public LocalTime getAverageDeliveryTime(){
         return this.averageDeliveryTime;
     }
@@ -76,12 +100,12 @@ class Menu {
         this.dueDate = dueDate;
     }
 
-    public LocalTime getHorarioDeEntrega() {
-        return horarioDeEntrega;
+    public LocalTime getDeliveryTime() {
+        return deliveryTime;
     }
 
-    public void setHorarioDeEntrega(LocalTime horarioDeEntrega) {
-        this.horarioDeEntrega = horarioDeEntrega;
+    public void setDeliveryTime(LocalTime deliveryTime) {
+        this.deliveryTime = deliveryTime;
     }
 
     public Double getPrice() {
