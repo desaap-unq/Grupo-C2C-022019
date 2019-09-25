@@ -1,9 +1,7 @@
 package com.unq.ViandasYaGrupoC2C022019;
 
-import com.unq.ViandasYaGrupoC2C022019.service.UsuarioService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -11,12 +9,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class ApplicationTests {
 
-    @Autowired
-    private UsuarioService usuarioService;
-    
-	@Test
-	public void contextLoads() {
-            System.out.println(usuarioService);
-	}
+    @Test
+    public void contextLoads() {
+    }
 
 }
