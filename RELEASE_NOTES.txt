@@ -1,23 +1,22 @@
-
-====== RELEASE NOTE  ==========
-En el root path deberían agregar un archivo RELEASE-NOTES.txt donde deben poner lo que entregan con cada TAG (el estado de cada punto de entrega y detalla lo que no está implementado)
-
-
 ---------------------------------------------------------------------
-TAG XXXXXX
+TAG Entrega-1-GG
 ---------------------------------------------------------------------
 NEW FEATURES (lo que están entregando y está funcionando):
-* xxx
-* xxx
+* creation repo GitHub
+* creation project SprintBoot
+* creation project React
+* config Travis backend/frontend
+* build backend/frontend
+* model - UnitTest
+* heroku deploy backend/frontend
+* codacy integrate backend
+* Gmaps react app
 
-NOTES (ej: funcionalidad que falta, alguna consideración especial):
-* xxx
-* xxx
+NOTES:
+* coverage
+* Gmaps: given a text look for a point
+* Gmaps: given a point look for a text
 
-KNOWN ISSUES (ej: funcionalidad que saben que están funcionando diferente, algún error conocido en la funcionalidad terminada, etc) :
-* xxx
-* xxx
-
-Ejemplos típicos: 
-https://db.apache.org/ojb/release-notes.txt 
-https://www.apache.org/dist/commons/net/RELEASE-NOTES.txt
+KNOWN ISSUES :
+* 
+* 
