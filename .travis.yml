@@ -1,37 +1,27 @@
-dist: trusty
-sudo: required
-language: java
-
-sudo: false
-		
-cache:
-directories:
-- "$HOME/.m2"
-
-before_cache:
-- rm -rf $HOME/.m2/repository/com/autentia/traviscodacy
-		
-before_install:
-- sudo apt-get install jq
-- wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url)
-		
-after_success:
-- java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r target/jacoco/jacoco.xml
-
-jdk:
-- oraclejdk8
-install:
-- mvn clean install -Dmaven.compiler.target=1.8 -Dmaven.compiler.source=1.8
+matrix:
+ include:
+  - language: java
+    dist: trusty
+    sudo: required
+    jdk:
+    - oraclejdk8
+    install:
+    - cd viandasYa-backend && mvn clean install -Dmaven.compiler.target=1.8 -Dmaven.compiler.source=1.8
+  - language: node_js
+    node_js:
+     - "stable"
+    cache: 
+     directories:
+      - node_modules
+    before_script:
+     - cd viandasya-frontend
+     - npm install
+    script:
+     - npm test
+     - npm run build
 deploy:
  - provider: heroku
    skip_cleanup: true
    api-key: c399f4fc-b99c-45a9-baae-61dc1c27349f
    app: app-grupoc2c-2019
    on: develop
-notifications:
-  email:
-    recipients:
-      - ggtpi0gabriel@gmail.com
-      - sergioluke35@gmail.com
-    on_success: never # default: change
-    on_failure: always # default: always
