@@ -1,37 +1,31 @@
+after_success: 
+  - "java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r target/jacoco/jacoco.xml"
+before_cache: 
+  - "rm -rf $HOME/.m2/repository/com/autentia/traviscodacy"
+before_install: 
+  - "sudo apt-get install jq"
+  - "wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url)"
+cache: ~
+deploy: 
+  - 
+    api-key: c399f4fc-b99c-45a9-baae-61dc1c27349f
+    app: app-grupoc2c-2019
+    provider: heroku
+    skip_cleanup: true
+    true: develop
+directories: 
+  - $HOME/.m2
 dist: trusty
-sudo: required
+install: 
+  - "mvn clean install -Dmaven.compiler.target=1.8 -Dmaven.compiler.source=1.8"
+jdk: 
+  - oraclejdk8
 language: java
-
-sudo: false
-		
-cache:
-directories:
-- "$HOME/.m2"
-
-before_cache:
-- rm -rf $HOME/.m2/repository/com/autentia/traviscodacy
-		
-before_install:
-- sudo apt-get install jq
-- wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url)
-		
-after_success:
-- java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r target/jacoco/jacoco.xml
-
-jdk:
-- oraclejdk8
-install:
-- mvn clean install -Dmaven.compiler.target=1.8 -Dmaven.compiler.source=1.8
-deploy:
- - provider: heroku
-   skip_cleanup: true
-   api-key: c399f4fc-b99c-45a9-baae-61dc1c27349f
-   app: app-grupoc2c-2019
-   on: develop
-notifications:
-  email:
-    recipients:
+notifications: 
+  email: 
+    on_failure: always
+    on_success: never
+    recipients: 
       - ggtpi0gabriel@gmail.com
       - sergioluke35@gmail.com
-    on_success: never # default: change
-    on_failure: always # default: always
+sudo: false
