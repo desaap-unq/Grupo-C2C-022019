@@ -61,12 +61,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-            <groupId>com.unq</groupId>
-            <artifactId>ViandasYa-Grupo-C2C-022019</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <type>jar</type>
-        </dependency>
     </dependencies>
 
     <build>
