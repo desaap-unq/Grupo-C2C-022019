@@ -7,7 +7,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-class Order {
+public class Order {
     
     private Client client;
     private Business business;

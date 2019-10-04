@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-class Menu {
+public class Menu {
+    private Long id;
     private String name; 
     private String description;
     private List<MenuCategory> category; 

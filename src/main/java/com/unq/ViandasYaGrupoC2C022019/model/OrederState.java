@@ -1,5 +1,5 @@
 package com.unq.ViandasYaGrupoC2C022019.model;
 
-enum OrederState {
+public enum OrederState {
     PROGRESS,DISPATCHED
 }
