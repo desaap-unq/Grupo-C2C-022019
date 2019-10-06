@@ -1,13 +1,31 @@
 package com.unq.ViandasYaGrupoC2C022019.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import org.hibernate.annotations.CollectionType;
+import org.springframework.data.annotation.Id;
 
-public class Menu {
+@Entity
+public class Menu implements Serializable {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @javax.persistence.Id
     private Long id;
     private String name; 
     private String description;
+//    @ManyToMany
+  //  @Enumerated(EnumType.STRING)
+//    @OneToOne
+    @ElementCollection
     private List<MenuCategory> category; 
     private double deliveryCost;
     private LocalDate startDate; 
@@ -155,6 +173,14 @@ public class Menu {
 
     public void setMaximumAmountSalesPerDay(int maximumAmountSalesPerDay) {
         this.maximumAmountSalesPerDay = maximumAmountSalesPerDay;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
     
 }
