@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class MenuServiceTest extends ApplicationTests{
                 LocalTime.of(0, 20), LocalTime.of(0, 20), 50D, 1, 50D, 3, 120D, 100);
         this.menuService.save(menu);
         assertNotNull(menu.getId());
+        assertThat(menu.getName()).isEqualTo("Hamburgesa");
+        assertThat(menu.getDescription()).isEqualTo("Hamburguesa de carne con tomate y queso");
+        assertThat(menu.getCategory()).containsExactly(MenuCategory.HAMBURGUESAS);
     }
 
 }

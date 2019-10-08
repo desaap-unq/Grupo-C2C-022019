@@ -4,28 +4,24 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import org.hibernate.annotations.CollectionType;
 import org.springframework.data.annotation.Id;
 
 @Entity
 public class Menu implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @javax.persistence.Id
     private Long id;
     private String name; 
     private String description;
-//    @ManyToMany
-  //  @Enumerated(EnumType.STRING)
-//    @OneToOne
     @ElementCollection
+    @CollectionTable(name = "menu_category")
     private List<MenuCategory> category; 
     private double deliveryCost;
     private LocalDate startDate; 
