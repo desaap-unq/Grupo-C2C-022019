@@ -12,9 +12,10 @@ CREATE TABLE menu (
     price Double, 
     minimum_quantity BIGINT,
     minimum_quantity_price Double,
-    minimum_Quantitytwo BIGINT,
+    minimum_quantity_two BIGINT,
     minimum_quantity_price_two Double,
-    maximum_amount_sales_per_day BIGINT
+    maximum_amount_sales_per_day BIGINT,
+    active Boolean
 );
 
 CREATE TABLE menu_category (menu_id  BIGINT NOT NULL  , category BIGINT);

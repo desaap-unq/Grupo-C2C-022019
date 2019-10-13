@@ -31,14 +31,16 @@ public class Menu implements Serializable {
     private double price; 
     private int minimumQuantity;
     private double minimumQuantityPrice;
-    private int minimumQuantitytwo;
+    private int minimumQuantityTwo;
     private double minimumQuantityPriceTwo;
     private int maximumAmountSalesPerDay;
+    private boolean active;
+    
 
     public Menu(String name, String description, List<MenuCategory> category,
                 Double deliveryCost, LocalDate startDate, LocalDate dueDate, 
                 LocalTime deliveryTime, LocalTime averageDeliveryTime, Double price,
-                int minimumQuantity, Double minimumQuantityPrice, int minimumQuantitytwo,
+                int minimumQuantity, Double minimumQuantityPrice, int minimumQuantityTwo,
                 Double minimumQuantityPriceTwo, int maximumAmountSalesPerDay) {
         
         this.name = name;
@@ -52,9 +54,10 @@ public class Menu implements Serializable {
         this.price = price;
         this.minimumQuantity = minimumQuantity;
         this.minimumQuantityPrice = minimumQuantityPrice;
-        this.minimumQuantitytwo = minimumQuantitytwo;
+        this.minimumQuantityTwo = minimumQuantityTwo;
         this.minimumQuantityPriceTwo = minimumQuantityPriceTwo;
         this.maximumAmountSalesPerDay = maximumAmountSalesPerDay;
+        this.active = true;
     }
 
     public Menu(){}
@@ -147,12 +150,12 @@ public class Menu implements Serializable {
         this.minimumQuantityPrice = minimumQuantityPrice;
     }
 
-    public int getMinimumQuantitytwo() {
-        return minimumQuantitytwo;
+    public int getMinimumQuantityTwo() {
+        return minimumQuantityTwo;
     }
 
-    public void setMinimumQuantitytwo(int minimumQuantitytwo) {
-        this.minimumQuantitytwo = minimumQuantitytwo;
+    public void setMinimumQuantityTwo(int minimumQuantitytwo) {
+        this.minimumQuantityTwo = minimumQuantitytwo;
     }
 
     public Double getMinimumQuantityPriceTwo() {
@@ -177,6 +180,14 @@ public class Menu implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public boolean isActive() {
+        return this.active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
     
 }

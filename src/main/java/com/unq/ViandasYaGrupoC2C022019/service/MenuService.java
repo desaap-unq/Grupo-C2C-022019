@@ -17,9 +17,9 @@ public class MenuService {
     public Menu save(Menu aMenu) {
         return this.menuRepository.save(aMenu);
     }
-   
-    public void delete(Menu aMenu){
-        this.menuRepository.delete(aMenu);
+
+    void update(Menu menu) {
+        this.menuRepository.save(menu);
     }
    
 }
