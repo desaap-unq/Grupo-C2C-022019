@@ -1,5 +1,6 @@
 package com.unq.ViandasYaGrupoC2C022019.model;
 
+import com.unq.ViandasYaGrupoC2C022019.util.BusinessBuilder;
 import static org.junit.Assert.*;
 
 import org.junit.Test;

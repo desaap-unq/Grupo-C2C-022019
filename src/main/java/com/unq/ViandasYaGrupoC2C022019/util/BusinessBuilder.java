@@ -1,4 +1,6 @@
-package com.unq.ViandasYaGrupoC2C022019.model;
+package com.unq.ViandasYaGrupoC2C022019.util;
+
+import com.unq.ViandasYaGrupoC2C022019.model.Business;
 
 public class BusinessBuilder {
 

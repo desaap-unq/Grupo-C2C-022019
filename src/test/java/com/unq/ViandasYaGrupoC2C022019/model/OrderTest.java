@@ -1,5 +1,6 @@
 package com.unq.ViandasYaGrupoC2C022019.model;
 
+import com.unq.ViandasYaGrupoC2C022019.util.OrderBuilder;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;

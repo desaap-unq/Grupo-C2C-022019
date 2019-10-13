@@ -2,7 +2,7 @@ package com.unq.ViandasYaGrupoC2C022019.service;
 
 import com.unq.ViandasYaGrupoC2C022019.ApplicationTests;
 import com.unq.ViandasYaGrupoC2C022019.model.Menu;
-import com.unq.ViandasYaGrupoC2C022019.model.MenuBuilder;
+import com.unq.ViandasYaGrupoC2C022019.util.MenuBuilder;
 import com.unq.ViandasYaGrupoC2C022019.model.MenuCategory;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -43,7 +43,7 @@ public class MenuServiceTest extends ApplicationTests{
     
     @Test
     public void update_MenuActive_MenuNotActive() {
-        Menu menu = MenuBuilder.aMenu().build(entityManager);
+        Menu menu = MenuBuilder.aMenu().buildAndPersist(entityManager);
         assertTrue(menu.isActive());
         menu.setActive(false);
         this.menuService.update(menu);
