@@ -9,6 +9,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.ManyToOne;
 import org.springframework.data.annotation.Id;
 
 @Entity
@@ -35,13 +36,14 @@ public class Menu implements Serializable {
     private double minimumQuantityPriceTwo;
     private int maximumAmountSalesPerDay;
     private boolean active;
+    @ManyToOne
+    private Business business;
     
-
     public Menu(String name, String description, List<MenuCategory> category,
                 Double deliveryCost, LocalDate startDate, LocalDate dueDate, 
                 LocalTime deliveryTime, LocalTime averageDeliveryTime, Double price,
                 int minimumQuantity, Double minimumQuantityPrice, int minimumQuantityTwo,
-                Double minimumQuantityPriceTwo, int maximumAmountSalesPerDay) {
+                Double minimumQuantityPriceTwo, int maximumAmountSalesPerDay, Business business) {
         
         this.name = name;
         this.description = description;
@@ -57,6 +59,7 @@ public class Menu implements Serializable {
         this.minimumQuantityTwo = minimumQuantityTwo;
         this.minimumQuantityPriceTwo = minimumQuantityPriceTwo;
         this.maximumAmountSalesPerDay = maximumAmountSalesPerDay;
+        this.business = business;
         this.active = true;
     }
 
@@ -189,5 +192,15 @@ public class Menu implements Serializable {
     public void setActive(boolean active) {
         this.active = active;
     }
+
+    public Business getBusiness() {
+        return business;
+    }
+
+    public void setBusiness(Business business) {
+        this.business = business;
+    }
+    
+    
     
 }

@@ -1,8 +1,10 @@
 package com.unq.ViandasYaGrupoC2C022019.util;
 
 import com.unq.ViandasYaGrupoC2C022019.model.Business;
+import com.unq.ViandasYaGrupoC2C022019.model.VirtualWallet;
+import javax.persistence.EntityManager;
 
-public class BusinessBuilder {
+public class BusinessBuilder extends AbstractPersistenceBuilder<Business> {
 
 	public static BusinessBuilder aBusiness() {
 		return new BusinessBuilder();
@@ -12,15 +14,27 @@ public class BusinessBuilder {
 	private String logo = "no logo";
 	private String locality = "no locality";
 	private int phone = 151515;
-	
+        private VirtualWallet virtualWallet = new VirtualWallet();
+        
 	public Business build() {
 		Business aBusiness = new Business(name, logo, locality, locality, locality, locality, locality, locality, phone, locality, locality, locality);
-		return aBusiness;
+		aBusiness.setWallet(virtualWallet);
+                return aBusiness;
 	}
 	
 	public BusinessBuilder withName(String aName) {
 		this.name = aName;
 		return this;
 	}
+
+    public Business buildAndSave(EntityManager entityManager) {
+        instance =  build();
+        return super.build(entityManager);
+    }
+
+    public BusinessBuilder withWallet(VirtualWallet virtualWallet) {
+        this.virtualWallet = virtualWallet;
+        return this;
+    }
 
 }

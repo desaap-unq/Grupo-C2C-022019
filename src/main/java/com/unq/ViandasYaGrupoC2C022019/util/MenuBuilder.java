@@ -1,5 +1,6 @@
 package com.unq.ViandasYaGrupoC2C022019.util;
 
+import com.unq.ViandasYaGrupoC2C022019.model.Business;
 import com.unq.ViandasYaGrupoC2C022019.model.Menu;
 import com.unq.ViandasYaGrupoC2C022019.model.MenuCategory;
 import java.time.LocalDate;
@@ -28,6 +29,7 @@ public class MenuBuilder extends AbstractPersistenceBuilder<Menu>{
     private int minimumQuantityTwo = 2;
     private double minimumQuantityPriceTwo = 20d;
     private int maximumAmountSalesPerDay = 10;
+    private Business business = BusinessBuilder.aBusiness().build();
     
     public MenuBuilder withName(String name){
         this.name = name;
@@ -85,12 +87,17 @@ public class MenuBuilder extends AbstractPersistenceBuilder<Menu>{
         this.maximumAmountSalesPerDay = maximumAmountSalesPerDay;
         return this;
     }
+    public MenuBuilder withBusiness(Business business){
+        this.business = business;
+        return this;
+    }
+    
     
     public Menu build() {
         Menu aMenu = new Menu(
         name, description, category, deliveryCost, startDate, dueDate, deliveryTime, averageDeliveryTime,
         price, minimumQuantity, minimumQuantityPrice, minimumQuantityTwo, minimumQuantityPriceTwo,
-        maximumAmountSalesPerDay);
+        maximumAmountSalesPerDay,business);
         return aMenu;
     }
     public Menu buildAndPersist(EntityManager entityManager) {
