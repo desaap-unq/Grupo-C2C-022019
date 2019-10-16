@@ -2,6 +2,7 @@ package com.unq.ViandasYaGrupoC2C022019.service;
 
 import com.unq.ViandasYaGrupoC2C022019.model.Menu;
 import com.unq.ViandasYaGrupoC2C022019.persistence.MenuRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 @Service
@@ -18,8 +19,12 @@ public class MenuService {
         return this.menuRepository.save(aMenu);
     }
 
-    void update(Menu menu) {
+    public void update(Menu menu) {
         this.menuRepository.save(menu);
+    }
+    
+    public List<Menu> findByBusinessId(Long idBusiness){
+        return menuRepository.findByBusinessId(idBusiness);
     }
    
 }

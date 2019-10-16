@@ -68,7 +68,7 @@ public class MenuServiceTest extends ApplicationTests{
         Business business = BusinessBuilder.aBusiness().withWallet(virtualWallet).buildAndSave(entityManager);
 
         Menu menu = MenuBuilder.aMenu().withBusiness(business).buildAndPersist(entityManager);
-        assertFalse(menuService.findByIdBusiness(business.getId()).isEmpty());
+        assertFalse(menuService.findByBusinessId(business.getId()).isEmpty());
         
 
     }
