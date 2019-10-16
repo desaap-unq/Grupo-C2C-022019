@@ -34,14 +34,10 @@ public class MenuServiceTest extends ApplicationTests{
         List<MenuCategory> menuCategoryList = new ArrayList<>();
         menuCategoryList.add(MenuCategory.HAMBURGUESAS);
         VirtualWallet virtualWallet = VirtualWalletBuilder.aVirtualWallet().buildAndSave(entityManager);
-        System.out.println("------------------------------");
         System.out.println(virtualWallet.getId());
-        System.out.println("------------------------------");
 
         Business business = BusinessBuilder.aBusiness().withWallet(virtualWallet).buildAndSave(entityManager);
-        System.out.println("------------------------------");
         System.out.println(business.getId());
-        System.out.println("------------------------------");
         Menu menu = new Menu("Hamburgesa", "Hamburguesa de carne con tomate y queso",
                 menuCategoryList, 40D, LocalDate.now(), LocalDate.now(),
                 LocalTime.of(0, 20), LocalTime.of(0, 20), 50D, 1, 50D, 3, 120D, 100,business);
@@ -66,11 +62,16 @@ public class MenuServiceTest extends ApplicationTests{
         assertFalse(persistMenu.isActive());
     }
     
-//    @Test
-//    public void findByBusinessId_menuExistInDataBase_ArrayMenu() {
-//        Menu menu = MenuBuilder.aMenu().build();
-//        assertTrue(menu.isActive());
-//    }
+    @Test
+    public void findByBusinessId_menuExistInDataBase_ArrayMenu() {
+        VirtualWallet virtualWallet = VirtualWalletBuilder.aVirtualWallet().buildAndSave(entityManager);
+        Business business = BusinessBuilder.aBusiness().withWallet(virtualWallet).buildAndSave(entityManager);
+
+        Menu menu = MenuBuilder.aMenu().withBusiness(business).buildAndPersist(entityManager);
+        assertFalse(menuService.findByIdBusiness(business.getId()).isEmpty());
+        
+
+    }
     
     
 
