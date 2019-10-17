@@ -21,7 +21,7 @@ public class BusinessService {
     }
     
     public Business findBusinessById(Long businessId) {
-        Assert.isTrue(businessRepository.existsById(businessId), ("Not found Bisness with id ".concat(businessId.toString())));
+        Assert.isTrue(businessRepository.existsById(businessId), ("Not found Busness with id ".concat(businessId.toString())));
         return this.businessRepository.findById(businessId).get();
     }
 }
