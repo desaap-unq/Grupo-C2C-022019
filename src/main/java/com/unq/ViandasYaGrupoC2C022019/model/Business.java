@@ -1,155 +1,178 @@
 package com.unq.ViandasYaGrupoC2C022019.model;
 
-public class Business {
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.OneToOne;
+import org.springframework.data.annotation.Id;
 
-	private String name;
-	private String logo;
-	private String locality;
-	private int phone;
-	private String address;		// gmaps
-	private String location;	//  ""
-	private String description;
-	private String link;
-	private String email;
-	private String schedule;
-	private String days;
-	private String delivery;
-	private VirtualWallet wallet;
+@Entity
+public class Business implements Serializable {
 
-	public Business(String name, String logo, String locality, String address, String location, String description, String link, String email, int phone, String schelude, String days, String delivery) {
-		this.name = name;
-		this.logo = logo;
-		this.locality = locality;
-		this.address = address;
-		this.location = location;
-		this.description = description;
-		this.link = link;
-		this.email = email;
-		this.phone = phone;
-		this.schedule = schelude;
-		this.days = days;
-		this.delivery = delivery;
-		this.wallet = new VirtualWallet();
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @javax.persistence.Id
+    private Long id;
+    private String name;
+    private String logo;
+    private String locality;
+    private int phone;
+    private String address;		// gmaps
+    private String location;	//  ""
+    private String description;
+    private String link;
+    private String email;
+    private String schedule;
+    private String days;
+    private String delivery;
+    @OneToOne
+    private VirtualWallet wallet;
 
-	public String getAddress() {
-		return address;
-	}
+    public Business(String name, String logo, String locality, String address, String location, String description, String link, String email, int phone, String schelude, String days, String delivery) {
+        this.name = name;
+        this.logo = logo;
+        this.locality = locality;
+        this.address = address;
+        this.location = location;
+        this.description = description;
+        this.link = link;
+        this.email = email;
+        this.phone = phone;
+        this.schedule = schelude;
+        this.days = days;
+        this.delivery = delivery;
+        this.wallet = new VirtualWallet();
+    }
+    
+    public Business(){}
+    
+    public Long getId() {
+        return id;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    public String getAddress() {
+        return address;
+    }
 
-	public String getLocation() {
-		return location;
-	}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	public void setLocation(String location) {
-		this.location = location;
-	}
+    public String getLocation() {
+        return location;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public String getLink() {
-		return link;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setLink(String link) {
-		this.link = link;
-	}
+    public String getLink() {
+        return link;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setLink(String link) {
+        this.link = link;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public String getSchedule() {
-		return schedule;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setSchedule(String schedule) {
-		this.schedule = schedule;
-	}
+    public String getSchedule() {
+        return schedule;
+    }
 
-	public String getDays() {
-		return days;
-	}
+    public void setSchedule(String schedule) {
+        this.schedule = schedule;
+    }
 
-	public void setDays(String days) {
-		this.days = days;
-	}
+    public String getDays() {
+        return days;
+    }
 
-	public String getDelivery() {
-		return delivery;
-	}
+    public void setDays(String days) {
+        this.days = days;
+    }
 
-	public void setDelivery(String delivery) {
-		this.delivery = delivery;
-	}
+    public String getDelivery() {
+        return delivery;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setDelivery(String delivery) {
+        this.delivery = delivery;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getLogo() {
-		return logo;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setLogo(String logo) {
-		this.logo = logo;
-	}
+    public String getLogo() {
+        return logo;
+    }
 
-	public String getLocality() {
-		return locality;
-	}
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
 
-	public void setLocality(String locality) {
-		this.locality = locality;
-	}
+    public String getLocality() {
+        return locality;
+    }
 
-	public int getPhone() {
-		return phone;
-	}
+    public void setLocality(String locality) {
+        this.locality = locality;
+    }
 
-	public void setPhone(int phone) {
-		this.phone = phone;
-	}
+    public int getPhone() {
+        return phone;
+    }
 
-	public VirtualWallet getWallet() {
-		return wallet;
-	}
+    public void setPhone(int phone) {
+        this.phone = phone;
+    }
 
-	public void setWallet(VirtualWallet wallet) {
-		this.wallet = wallet;
-	}
+    public VirtualWallet getWallet() {
+        return wallet;
+    }
 
-	public double getBalance() {
-		return this.wallet.getBalance();
-	}
+    public void setWallet(VirtualWallet wallet) {
+        this.wallet = wallet;
+    }
 
-	public double removeAllCash() {
-		return this.wallet.removeAllCash();
-	}
+    public double getBalance() {
+        return this.wallet.getBalance();
+    }
 
-	public void sale(double amount) {
-		this.wallet.sale(amount);
-	}
+    public double removeAllCash() {
+        return this.wallet.removeAllCash();
+    }
 
-	public double removeCash(int amount) {
-		return this.wallet.removeCash(amount);
-	}
-	
+    public void sale(double amount) {
+        this.wallet.sale(amount);
+    }
+
+    public double removeCash(int amount) {
+        return this.wallet.removeCash(amount);
+    }
+
 }

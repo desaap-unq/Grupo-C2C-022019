@@ -1,12 +1,28 @@
 package com.unq.ViandasYaGrupoC2C022019.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.ManyToOne;
+import org.springframework.data.annotation.Id;
 
-class Menu {
+@Entity
+public class Menu implements Serializable {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @javax.persistence.Id
+    private Long id;
     private String name; 
     private String description;
+    @ElementCollection
+    @CollectionTable(name = "menu_category")
     private List<MenuCategory> category; 
     private double deliveryCost;
     private LocalDate startDate; 
@@ -16,15 +32,18 @@ class Menu {
     private double price; 
     private int minimumQuantity;
     private double minimumQuantityPrice;
-    private int minimumQuantitytwo;
+    private int minimumQuantityTwo;
     private double minimumQuantityPriceTwo;
     private int maximumAmountSalesPerDay;
-
+    private boolean active;
+    @ManyToOne
+    private Business business;
+    
     public Menu(String name, String description, List<MenuCategory> category,
                 Double deliveryCost, LocalDate startDate, LocalDate dueDate, 
                 LocalTime deliveryTime, LocalTime averageDeliveryTime, Double price,
-                int minimumQuantity, Double minimumQuantityPrice, int minimumQuantitytwo,
-                Double minimumQuantityPriceTwo, int maximumAmountSalesPerDay) {
+                int minimumQuantity, Double minimumQuantityPrice, int minimumQuantityTwo,
+                Double minimumQuantityPriceTwo, int maximumAmountSalesPerDay, Business business) {
         
         this.name = name;
         this.description = description;
@@ -37,9 +56,11 @@ class Menu {
         this.price = price;
         this.minimumQuantity = minimumQuantity;
         this.minimumQuantityPrice = minimumQuantityPrice;
-        this.minimumQuantitytwo = minimumQuantitytwo;
+        this.minimumQuantityTwo = minimumQuantityTwo;
         this.minimumQuantityPriceTwo = minimumQuantityPriceTwo;
         this.maximumAmountSalesPerDay = maximumAmountSalesPerDay;
+        this.business = business;
+        this.active = true;
     }
 
     public Menu(){}
@@ -132,12 +153,12 @@ class Menu {
         this.minimumQuantityPrice = minimumQuantityPrice;
     }
 
-    public int getMinimumQuantitytwo() {
-        return minimumQuantitytwo;
+    public int getMinimumQuantityTwo() {
+        return minimumQuantityTwo;
     }
 
-    public void setMinimumQuantitytwo(int minimumQuantitytwo) {
-        this.minimumQuantitytwo = minimumQuantitytwo;
+    public void setMinimumQuantityTwo(int minimumQuantitytwo) {
+        this.minimumQuantityTwo = minimumQuantitytwo;
     }
 
     public Double getMinimumQuantityPriceTwo() {
@@ -155,5 +176,31 @@ class Menu {
     public void setMaximumAmountSalesPerDay(int maximumAmountSalesPerDay) {
         this.maximumAmountSalesPerDay = maximumAmountSalesPerDay;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public boolean isActive() {
+        return this.active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public Business getBusiness() {
+        return business;
+    }
+
+    public void setBusiness(Business business) {
+        this.business = business;
+    }
+    
+    
     
 }

@@ -1,6 +1,11 @@
 
-package com.unq.ViandasYaGrupoC2C022019.model;
+package com.unq.ViandasYaGrupoC2C022019.util;
 
+import com.unq.ViandasYaGrupoC2C022019.model.Business;
+import com.unq.ViandasYaGrupoC2C022019.model.Client;
+import com.unq.ViandasYaGrupoC2C022019.model.DispatchType;
+import com.unq.ViandasYaGrupoC2C022019.model.Menu;
+import com.unq.ViandasYaGrupoC2C022019.model.Order;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;

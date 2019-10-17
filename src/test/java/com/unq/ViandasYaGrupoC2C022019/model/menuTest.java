@@ -1,5 +1,6 @@
 package com.unq.ViandasYaGrupoC2C022019.model;
 
+import com.unq.ViandasYaGrupoC2C022019.util.BusinessBuilder;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -14,10 +15,10 @@ public class menuTest {
         
         List<MenuCategory> menuCategoryList = new ArrayList<>();
         menuCategoryList.add(MenuCategory.HAMBURGUESAS);
-        
+        Business business = BusinessBuilder.aBusiness().build();
         Menu menu = new Menu("Hamburgesa", "Hamburguesa de carne con tomate y queso",
                         menuCategoryList ,40D, LocalDate.now(),LocalDate.now(),
-                        LocalTime.of(0,20), LocalTime.of(0,20), 50D, 1, 50D, 3,120D,100);
+                        LocalTime.of(0,20), LocalTime.of(0,20), 50D, 1, 50D, 3,120D,100,business);
 	
 	       assertTrue(menu.getCategory().contains(MenuCategory.HAMBURGUESAS));
 	       assertTrue(menu.getDeliveryCost() == 40D);
