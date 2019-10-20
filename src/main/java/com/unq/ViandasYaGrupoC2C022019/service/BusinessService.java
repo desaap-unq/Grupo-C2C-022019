@@ -11,9 +11,13 @@ public class BusinessService {
 
 	@Autowired
 	private BusinessRepository businessRepository;
+	
+	public BusinessService(BusinessRepository repository) {
+		this.businessRepository = repository;
+	}
 
-	public Business findByBusinessId(long idBusiness) {
-		return null;
+	public Business findByBusinessId(Long idBusiness) {
+		return businessRepository.getOne(idBusiness);
 	}
 
 	public Business save(Business aBusiness) {

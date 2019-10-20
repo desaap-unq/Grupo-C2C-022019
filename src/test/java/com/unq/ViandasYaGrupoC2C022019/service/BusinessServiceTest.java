@@ -51,6 +51,13 @@ public class BusinessServiceTest extends ApplicationTests {
 		assertNotNull(aBusiness.getId());
 	}
 	
-	
+	@Test
+	public void testFindByBusinessId() {
+		Business business = new Business();
+		business.setName("Dorita");
+		service.save(business);
+		
+		assertNotNull(service.findByBusinessId(business.getId()));
+	}
 	
 }
