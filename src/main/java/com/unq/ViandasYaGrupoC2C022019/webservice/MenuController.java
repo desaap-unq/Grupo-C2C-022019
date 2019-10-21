@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("menu")
 @CrossOrigin(origins = "http://localhost:3000")
 public class MenuController {
-    
-    @Autowired 
+
+    @Autowired
     MenuService menuService;
-    
-     @GetMapping("/business/{id}")
-    public List<Menu> findByBusinessId(@PathVariable long id){
+
+    @GetMapping("/business/{id}")
+    public List<Menu> findByBusinessId(@PathVariable long id) {
         List<Menu> menus = menuService.findByBusinessId(id);
         return menus;
     }
