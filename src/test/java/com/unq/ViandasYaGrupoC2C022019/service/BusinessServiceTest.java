@@ -60,4 +60,24 @@ public class BusinessServiceTest extends ApplicationTests {
 		assertNotNull(service.findByBusinessId(business.getId()));
 	}
 	
+	@Test
+	public void testFindByBusinessId_More_Business() {
+		Business business = new Business();
+		business.setName("Dorita");
+		service.save(business);
+		
+		VirtualWallet virtualWallet = VirtualWalletBuilder.aVirtualWallet()
+				  										  .buildAndSave(entityManager);
+		Business aBusiness = BusinessBuilder.aBusiness()
+											.withWallet(virtualWallet)
+											.withName("McDonald")
+											.buildAndSave(entityManager);
+		
+		Business dorita = service.findByBusinessId(business.getId());
+		Business mcdonald = service.findByBusinessId(aBusiness.getId());
+		
+		assertEquals(business.getName(), dorita.getName());
+		assertEquals(aBusiness.getName(), mcdonald.getName());
+	}
+	
 }

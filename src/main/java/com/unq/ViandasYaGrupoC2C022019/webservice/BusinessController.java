@@ -21,4 +21,9 @@ public class BusinessController {
 		Business business = service.findByBusinessId(id);
 		return business;
 	}
+	
+//	public Bus
+	/**
+	 * findByString
+	 */
 }

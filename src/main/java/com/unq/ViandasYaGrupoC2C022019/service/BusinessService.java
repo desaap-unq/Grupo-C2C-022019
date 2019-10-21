@@ -17,7 +17,7 @@ public class BusinessService {
 	}
 
 	public Business findByBusinessId(Long idBusiness) {
-		return businessRepository.getOne(idBusiness);
+		return businessRepository.findById(idBusiness);
 	}
 
 	public Business save(Business aBusiness) {
