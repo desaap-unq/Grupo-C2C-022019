@@ -10,8 +10,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
 
-public class OrderBuilder {
+public class OrderBuilder extends AbstractPersistenceBuilder<Order> {
     
     private Client client = new Client("Gabriel", "Guzman", "gabriel.guzman@alu.unq.edu.ar", 1515151515, 
                                     "Banfield", "Laprida 458");
@@ -60,6 +61,10 @@ public class OrderBuilder {
     public OrderBuilder withDeliveryTime(LocalTime aDeliveryTime) {
 	this.deliveryTime = aDeliveryTime;
 	return this;
+    }
+     public Order buildAndSave(EntityManager entityManager) {
+        instance =  build();
+        return super.build(entityManager);
     }
         
 }

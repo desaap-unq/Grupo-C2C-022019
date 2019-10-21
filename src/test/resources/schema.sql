@@ -2,6 +2,8 @@ DROP TABLE IF EXISTS menu;
 DROP TABLE IF EXISTS menu_category;
 DROP TABLE IF EXISTS business;
 DROP TABLE IF EXISTS virtual_wallet;
+DROP TABLE IF EXISTS client;
+DROP TABLE IF EXISTS order_table;
 
 CREATE TABLE menu (
     id BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -23,6 +25,7 @@ CREATE TABLE menu (
 );
 
 CREATE TABLE menu_category (menu_id  BIGINT NOT NULL  , category BIGINT);
+CREATE TABLE order_table_menus (order_id BIGINT , menus_id  BIGINT);
 
 CREATE TABLE virtual_wallet (id BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT, balance BIGINT);
 
@@ -41,3 +44,6 @@ CREATE TABLE business (id BIGINT PRIMARY KEY AUTO_INCREMENT,
      schedule VARCHAR(45),
      wallet_id BIGINT
 );
+
+CREATE TABLE client (id BIGINT PRIMARY KEY AUTO_INCREMENT, address VARCHAR(45), email VARCHAR(45), locality VARCHAR(45), name VARCHAR(45), phone VARCHAR(45), surname VARCHAR(45), wallet_id BIGINT);
+CREATE TABLE order_table (id BIGINT PRIMARY KEY AUTO_INCREMENT, business_id BIGINT, client_id BIGINT, delivery_time DATETIME, dispatch_date DATETIME, dispatch_time DATETIME, dispatch_type BIGINT, order_date DATETIME, score BIGINT, state BIGINT );

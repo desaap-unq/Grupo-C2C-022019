@@ -6,21 +6,59 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import org.springframework.data.annotation.Id;
 
+@Entity
+@Table(name = "order_table")
 public class Order {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @javax.persistence.Id
+    private Long id;
+    @ManyToOne
     private Client client;
+    @ManyToOne
     private Business business;
+    @OneToMany
     private List<Menu> menus = new ArrayList<Menu>();
+    @Enumerated(EnumType.ORDINAL)
     private DispatchType dispatchType;
     private LocalDate orderDate;
     private LocalDate dispatchDate;
+    @Enumerated(EnumType.ORDINAL)
     private OrederState state;
     private LocalTime dispatchTime;
     private LocalTime deliveryTime;
     private int score = 0;
     
+    public Order(){}
+    
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalTime getDeliveryTime() {
+        return deliveryTime;
+    }
+
+    public void setDeliveryTime(LocalTime deliveryTime) {
+        this.deliveryTime = deliveryTime;
+    }
+    
+    
     public Order(Client client, Business business, List<Menu> menus, DispatchType dispatchType, LocalDate dispatchDate, LocalTime deliveryTime) {
         this.client = client;
         this.business = business;
