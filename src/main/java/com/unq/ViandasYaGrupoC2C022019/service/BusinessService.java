@@ -1,9 +1,12 @@
 package com.unq.ViandasYaGrupoC2C022019.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.unq.ViandasYaGrupoC2C022019.model.Business;
+import com.unq.ViandasYaGrupoC2C022019.model.MenuCategory;
 import com.unq.ViandasYaGrupoC2C022019.persistence.BusinessRepository;
 
 @Service
@@ -23,6 +26,15 @@ public class BusinessService {
 	public Business save(Business aBusiness) {
 		return businessRepository.save(aBusiness);
 	}
+
+	public List<Business> findByCategory(String comida) {
+		List<Business> business = businessRepository.findByMenuId(comida);
+		return business;
+	}
+
+//	public List<Business> findByCategory(MenuCategory hamburguesas) {
+//		return null;
+//	}
 
 	
 }

@@ -2,14 +2,22 @@ package com.unq.ViandasYaGrupoC2C022019.service;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Repeat;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.unq.ViandasYaGrupoC2C022019.ApplicationTests;
 import com.unq.ViandasYaGrupoC2C022019.model.Business;
+import com.unq.ViandasYaGrupoC2C022019.model.Menu;
+import com.unq.ViandasYaGrupoC2C022019.model.MenuCategory;
 import com.unq.ViandasYaGrupoC2C022019.model.VirtualWallet;
 import com.unq.ViandasYaGrupoC2C022019.util.BusinessBuilder;
 import com.unq.ViandasYaGrupoC2C022019.util.VirtualWalletBuilder;
@@ -60,6 +68,7 @@ public class BusinessServiceTest extends ApplicationTests {
 		assertNotNull(service.findByBusinessId(business.getId()));
 	}
 	
+	@Repeat(value = 10)
 	@Test
 	public void testFindByBusinessId_More_Business() {
 		Business business = new Business();
@@ -78,6 +87,23 @@ public class BusinessServiceTest extends ApplicationTests {
 		
 		assertEquals(business.getName(), dorita.getName());
 		assertEquals(aBusiness.getName(), mcdonald.getName());
+	}
+	
+	@Test
+	public void testFindByCategory_Menu() {
+		List<MenuCategory> menuCategoryList = new ArrayList<>();
+        menuCategoryList.add(MenuCategory.HAMBURGUESAS);
+        
+        VirtualWallet virtualWallet = VirtualWalletBuilder.aVirtualWallet().buildAndSave(entityManager);
+
+        Business business = BusinessBuilder.aBusiness().withWallet(virtualWallet).buildAndSave(entityManager);
+        
+        // builder
+        Menu menu = new Menu("Hamburguesas", "Hamburguesa de carne con tomate y queso",
+                menuCategoryList, 40D, LocalDate.now(), LocalDate.now(),
+                LocalTime.of(0, 20), LocalTime.of(0, 20), 50D, 1, 50D, 3, 120D, 100,business);
+        
+        assertFalse(service.findByCategory(MenuCategory.HAMBURGUESAS.name()).isEmpty());  
 	}
 	
 }
