@@ -20,15 +20,15 @@ public class BusinessService {
 	}
 
 	public Business findByBusinessId(Long idBusiness) {
-		return businessRepository.findById(idBusiness);
+		return businessRepository.findById(idBusiness).get();
 	}
 
 	public Business save(Business aBusiness) {
 		return businessRepository.save(aBusiness);
 	}
 
-	public List<Business> findByCategory(String comida) {
-		List<Business> business = businessRepository.findByMenuId(comida);
+	public List<Integer> findByCategory(MenuCategory comida) {
+		List<Integer> business = businessRepository.findByMenuId(comida);
 		return business;
 	}
 

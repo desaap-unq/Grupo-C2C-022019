@@ -25,9 +25,9 @@ public class BusinessController {
 		return business;
 	}
 	
-	@GetMapping("/business/{comida}")
-	public List<Business> findByBussinessName(@PathVariable String comida) {
-		List<Business> business = service.findByCategory(comida);
-		return null;
-	}
+//	@GetMapping("/business/{comida}")
+//	public List<Business> findByBussinessName(@PathVariable String comida) {
+//		List<Business> business = service.findByCategory(comida);
+//		return null;
+//	}
 }

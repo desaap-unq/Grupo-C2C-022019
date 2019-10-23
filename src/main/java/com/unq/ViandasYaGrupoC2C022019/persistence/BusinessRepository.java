@@ -6,11 +6,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.unq.ViandasYaGrupoC2C022019.model.Business;
+import com.unq.ViandasYaGrupoC2C022019.model.MenuCategory;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface BusinessRepository extends MyBaseRepository<Business, Long> {
+public interface BusinessRepository extends JpaRepository<Business, Long> {
 
-	Business findById(Long idBusiness);
+	//Business findById(Long idBusiness);
 
-	@Query("select m.business from Menu m where :food in category(m.category)")
-	List<Business> findByMenuId(@Param("food") String food);	
+	@Query("select m.business.id from Menu m join m.category c where c = :food")
+	List<Integer> findByMenuId(@Param("food") MenuCategory food);	
 }

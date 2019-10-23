@@ -25,7 +25,7 @@ public class Menu implements Serializable {
     private String description;
     @ElementCollection
     @CollectionTable(name = "menu_category")
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private List<MenuCategory> category; 
     private double deliveryCost;
     private LocalDate startDate; 
