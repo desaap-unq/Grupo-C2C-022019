@@ -6,6 +6,7 @@ import com.unq.ViandasYaGrupoC2C022019.model.Menu;
 import com.unq.ViandasYaGrupoC2C022019.model.MenuCategory;
 import com.unq.ViandasYaGrupoC2C022019.model.VirtualWallet;
 import com.unq.ViandasYaGrupoC2C022019.util.BusinessBuilder;
+import com.unq.ViandasYaGrupoC2C022019.util.MenuBuilder;
 import com.unq.ViandasYaGrupoC2C022019.util.VirtualWalletBuilder;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -14,8 +15,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,9 +27,6 @@ public class BusinessServiceTest extends ApplicationTests {
 
     @Autowired
     private BusinessService businessService;
-    
-    @Autowired
-    private MenuService menuService;
 
     @Autowired
     EntityManager entityManager;
@@ -46,7 +45,7 @@ public class BusinessServiceTest extends ApplicationTests {
         VirtualWallet virtualWallet = VirtualWalletBuilder.aVirtualWallet().buildAndSave(entityManager);
         Business businessSaved = BusinessBuilder.aBusiness().withWallet(virtualWallet).buildAndSave(entityManager);
 
-        assertThat(businessService.findBusinessById(businessSaved.getId()).getId());
+        assertThat(businessService.findBusinessById(businessSaved.getId()).getId()).isEqualTo(businessSaved.getId());
 
     }
 
@@ -59,20 +58,48 @@ public class BusinessServiceTest extends ApplicationTests {
     }
 
     @Test
-    public void testFindByCategory_Menu() {
+    public void findByCategory_existBusinessWithCategory_ListWithABusiness() {
         List<MenuCategory> menuCategoryList = new ArrayList<>();
         menuCategoryList.add(MenuCategory.HAMBURGUESAS);
         menuCategoryList.add(MenuCategory.EMPANADAS);
 
         VirtualWallet virtualWallet = VirtualWalletBuilder.aVirtualWallet().buildAndSave(entityManager);
+        VirtualWallet otherVirtualWallet = VirtualWalletBuilder.aVirtualWallet().buildAndSave(entityManager);
+
+        Business business = BusinessBuilder.aBusiness().withWallet(virtualWallet).buildAndSave(entityManager);
+        Business Otherbusiness = BusinessBuilder.aBusiness().withWallet(otherVirtualWallet).buildAndSave(entityManager);
+
+        Menu aMenu = MenuBuilder.aMenu().withCategories(menuCategoryList)
+                .withAverageDeliveryTime(LocalTime.of(0, 20))
+                .withDeliveryCost(0)
+                .withDeliveryTime(LocalTime.of(0, 20))
+                .withDescription("Hamburguesa de carne con tomate y queso")
+                .withDueDate(LocalDate.now())
+                .withBusiness(business).buildAndPersist(entityManager);
+
+        Menu otherMenu = MenuBuilder.aMenu().withCategories(new ArrayList<MenuCategory>()).withBusiness(Otherbusiness).buildAndPersist(entityManager);
+
+        assertThat(businessService.findByCategory(MenuCategory.HAMBURGUESAS.name())).asList().isNotEmpty().size().isEqualTo(1);
+        assertEquals(businessService.findByCategory(MenuCategory.HAMBURGUESAS.name()).get(0).getId(), business.getId());
+    }
+
+    @Test
+    public void findByCategory_notExistBusinessWithCategory_EmptyList() {
+        List<MenuCategory> menuCategoryList = new ArrayList<MenuCategory>();
+
+        VirtualWallet virtualWallet = VirtualWalletBuilder.aVirtualWallet().buildAndSave(entityManager);
 
         Business business = BusinessBuilder.aBusiness().withWallet(virtualWallet).buildAndSave(entityManager);
 
-        Menu menu = new Menu("Hamburguesas", "Hamburguesa de carne con tomate y queso",
-        menuCategoryList, 40D, LocalDate.now(), LocalDate.now(),
-        LocalTime.of(0, 20), LocalTime.of(0, 20), 50D, 1, 50D, 3, 120D, 100, business);
-        menuService.save(menu);
-        assertFalse(businessService.findByCategory(MenuCategory.HAMBURGUESAS).isEmpty());  
+        MenuBuilder.aMenu().withCategories(menuCategoryList)
+                .withAverageDeliveryTime(LocalTime.of(0, 20))
+                .withDeliveryCost(0)
+                .withDeliveryTime(LocalTime.of(0, 20))
+                .withDescription("Hamburguesa de carne con tomate y queso")
+                .withDueDate(LocalDate.now())
+                .withBusiness(business).buildAndPersist(entityManager);
+
+        assertTrue(businessService.findByCategory(MenuCategory.HAMBURGUESAS.name()).isEmpty());
     }
 
 }
