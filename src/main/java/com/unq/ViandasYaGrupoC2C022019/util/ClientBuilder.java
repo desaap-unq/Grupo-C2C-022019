@@ -1,8 +1,10 @@
 package com.unq.ViandasYaGrupoC2C022019.util;
 
+import javax.persistence.EntityManager;
+
 import com.unq.ViandasYaGrupoC2C022019.model.Client;
 
-public class ClientBuilder {
+public class ClientBuilder extends AbstractPersistenceBuilder<Client>{
 
     public static ClientBuilder aClient() {
         return new ClientBuilder();
@@ -25,5 +27,10 @@ public class ClientBuilder {
         return this;
     }
     
+    public Client buildAndSave(EntityManager entityManager) {
+    	instance = build();
+    	return super.build(entityManager);
+    }
     
+    //withWallet
 }
