@@ -1,7 +1,18 @@
 package com.unq.ViandasYaGrupoC2C022019.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
+import org.springframework.data.annotation.Id;
+
+@Entity
 public class Client {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@javax.persistence.Id
+	private Long id;
 	private String name;
 	private String surname;
 	private String email;
