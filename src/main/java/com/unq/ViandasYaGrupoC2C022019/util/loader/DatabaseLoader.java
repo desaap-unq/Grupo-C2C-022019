@@ -16,7 +16,9 @@ public class DatabaseLoader implements CommandLineRunner {
 	private VirtualWalletRepository vwrepository;
 
 	@Autowired
-	public DatabaseLoader(ClientRepository crepository, VirtualWalletRepository vwrepository) {
+	public DatabaseLoader(ClientRepository crepository, 
+						  VirtualWalletRepository vwrepository,
+						  BusinessRepository brepository) {
 		this.crepository = crepository;
 		this.vwrepository = vwrepository;
 	}
