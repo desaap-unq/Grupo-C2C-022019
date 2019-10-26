@@ -14,23 +14,23 @@ public class BusinessBuilder extends AbstractPersistenceBuilder<Business> {
 	private String logo = "no logo";
 	private String locality = "no locality";
 	private int phone = 151515;
-        private VirtualWallet virtualWallet = new VirtualWallet();
+	private VirtualWallet virtualWallet = new VirtualWallet();
         
 	public Business build() {
 		Business aBusiness = new Business(name, logo, locality, locality, locality, locality, locality, locality, phone, locality, locality, locality);
 		aBusiness.setWallet(virtualWallet);
-                return aBusiness;
+		return aBusiness;
+	}
+	
+	public Business buildAndSave(EntityManager entityManager) {
+		instance = build();
+		return super.build(entityManager);
 	}
 	
 	public BusinessBuilder withName(String aName) {
 		this.name = aName;
 		return this;
 	}
-
-    public Business buildAndSave(EntityManager entityManager) {
-        instance =  build();
-        return super.build(entityManager);
-    }
 
     public BusinessBuilder withWallet(VirtualWallet virtualWallet) {
         this.virtualWallet = virtualWallet;
