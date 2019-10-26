@@ -3,7 +3,7 @@ package com.unq.ViandasYaGrupoC2C022019.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Transient;
+import javax.persistence.OneToOne;
 
 import org.springframework.data.annotation.Id;
 
@@ -20,8 +20,7 @@ public class Client {
 	private int phone;
 	private String locality; // gmaps
 	private String address;  //  ""
-	@Transient
-	@org.springframework.data.annotation.Transient
+	@OneToOne
 	private VirtualWallet wallet;
 
 	public Client(String name, String surname, String email, int phone, String locality, String address) {
