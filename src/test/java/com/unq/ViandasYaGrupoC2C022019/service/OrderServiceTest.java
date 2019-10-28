@@ -7,6 +7,7 @@ import com.unq.ViandasYaGrupoC2C022019.model.Menu;
 import com.unq.ViandasYaGrupoC2C022019.model.Order;
 import com.unq.ViandasYaGrupoC2C022019.model.OrderItem;
 import com.unq.ViandasYaGrupoC2C022019.model.VirtualWallet;
+import com.unq.ViandasYaGrupoC2C022019.persistence.OrderItemRepository;
 import com.unq.ViandasYaGrupoC2C022019.util.BusinessBuilder;
 import com.unq.ViandasYaGrupoC2C022019.util.ClientBuilder;
 import com.unq.ViandasYaGrupoC2C022019.util.MenuBuilder;
@@ -28,6 +29,9 @@ public class OrderServiceTest extends ApplicationTests {
     OrderService orderService;
     
     @Autowired
+    OrderItemRepository orderItemRepository;
+    
+    @Autowired
     EntityManager entityManager;
     
     @Test
@@ -45,11 +49,12 @@ public class OrderServiceTest extends ApplicationTests {
         OrderItem orderItem = new OrderItem(1, aMenu);
         OrderItem orderItem2 = new OrderItem(1, otherMenu);
         List<OrderItem> orderItems = new ArrayList<>();
-
+        
+        orderItemRepository.save(orderItem);
+        orderItemRepository.save(orderItem2);
+        
         orderItems.add(orderItem);
         orderItems.add(orderItem2);
-        
-        
         
         
         Order aOrder = OrderBuilder.aOrder().withBusiness(businessSaved).withClient(clientSaved).withOrderItems(orderItems).build();//.buildAndSave(entityManager);
@@ -57,7 +62,7 @@ public class OrderServiceTest extends ApplicationTests {
         assertNotNull(aOrder.getId());
         assertNotNull(aOrder.getOrderItems());
         assertTrue(aOrder.getOrderItems().size() == 2);
-       // assertNotNull(aOrder.getOrderItems().get(0).getId());
+        assertNotNull(aOrder.getOrderItems().get(0).getId());
     }    
         
     

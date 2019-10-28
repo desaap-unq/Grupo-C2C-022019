@@ -31,7 +31,7 @@ CREATE TABLE menu_category (menu_id  BIGINT NOT NULL  , category BIGINT);
 
 CREATE TABLE order_table_menus (order_id BIGINT , menus_id  BIGINT);
 
-CREATE TABLE order_item (id BIGINT, menu_id BIGINT , quantity BIGINT);
+CREATE TABLE order_item (id BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT, menu_id BIGINT , quantity BIGINT);
 
 CREATE TABLE order_table_order_items (order_id BIGINT , order_items_id  BIGINT);
 

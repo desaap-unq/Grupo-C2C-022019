@@ -28,7 +28,7 @@ public class Order {
     private Client client;
     @ManyToOne
     private Business business;
-    @OneToMany(cascade =CascadeType.PERSIST)
+    @OneToMany
     private List<OrderItem> orderItems = new ArrayList<OrderItem>();
     @Enumerated(EnumType.ORDINAL)
     private DispatchType dispatchType;
