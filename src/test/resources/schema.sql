@@ -4,6 +4,8 @@ DROP TABLE IF EXISTS business;
 DROP TABLE IF EXISTS virtual_wallet;
 DROP TABLE IF EXISTS client;
 DROP TABLE IF EXISTS order_table;
+DROP TABLE IF EXISTS order_item;
+DROP TABLE IF EXISTS order_table_order_items;
 DROP TABLE IF EXISTS order_table_menus;
 
 CREATE TABLE menu (
@@ -26,7 +28,12 @@ CREATE TABLE menu (
 );
 
 CREATE TABLE menu_category (menu_id  BIGINT NOT NULL  , category BIGINT);
+
 CREATE TABLE order_table_menus (order_id BIGINT , menus_id  BIGINT);
+
+CREATE TABLE order_item (id BIGINT, menu_id BIGINT , quantity BIGINT);
+
+CREATE TABLE order_table_order_items (order_id BIGINT , order_items_id  BIGINT);
 
 CREATE TABLE virtual_wallet (id BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT, balance BIGINT);
 
