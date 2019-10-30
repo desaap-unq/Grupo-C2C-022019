@@ -20,6 +20,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -81,8 +82,9 @@ public class BusinessServiceTest extends ApplicationTests {
 
         Menu otherMenu = MenuBuilder.aMenu().withCategories(new ArrayList<MenuCategory>()).withBusiness(Otherbusiness).buildAndPersist(entityManager);
 
-        assertThat(businessService.findByCategory(MenuCategory.HAMBURGUESAS.name())).asList().isNotEmpty().size().isEqualTo(1);
-        assertEquals(businessService.findByCategory(MenuCategory.HAMBURGUESAS.name()).get(0).getId(), business.getId());
+//        assertThat(businessService.findByCategory(MenuCategory.HAMBURGUESAS.name())).asList().isNotEmpty().size().isEqualTo(1);
+        Business recovery = businessService.findByCategory(MenuCategory.HAMBURGUESAS.name()).get(0);
+        assertEquals(recovery.getId(), business.getId());
     }
 
     @Test
