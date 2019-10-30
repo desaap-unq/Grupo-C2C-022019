@@ -139,7 +139,7 @@ public class OrderServiceTest extends ApplicationTests {
         Client clientSaved =  ClientBuilder.aClient().withName("Ramon").withWallet(virtualWalletClient).buildAndSave(entityManager);
         
         Menu aMenu = MenuBuilder.aMenu().withBusiness(businessSaved).build();
-        aMenu.setId(23L);
+        aMenu.setId(101L);
         Menu otherMenu = MenuBuilder.aMenu().withBusiness(businessSaved).buildAndPersist(entityManager);
 
         ItemDto aItemDto = new ItemDto(aMenu.getId(),1);
@@ -153,7 +153,7 @@ public class OrderServiceTest extends ApplicationTests {
         
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> orderService.saveFromOrderDto(orderDto))
-                .withMessage("Not found Menu with id 23");
+                .withMessage("Not found Menu with id 101");
                 
     }
     

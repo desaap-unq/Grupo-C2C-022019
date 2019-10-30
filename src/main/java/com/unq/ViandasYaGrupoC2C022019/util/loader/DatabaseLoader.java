@@ -111,17 +111,17 @@ public class DatabaseLoader implements CommandLineRunner {
 		
 		// Menu
 		
-		this.mrepository.save(mc_hamburger01);
-		this.mrepository.save(mc_hamburger02);
-
-		this.mrepository.save(chaval_cerveza01);
-		this.mrepository.save(chaval_cerveza02);
-
-		this.mrepository.save(larumba_pizzas);
-		this.mrepository.save(laruMenu_empanadas);
-
-		this.mrepository.save(sensei_cocinajaponesa01);
-		this.mrepository.save(sensei_cocinajaponesa02);
+//		this.mrepository.save(mc_hamburger01);
+//		this.mrepository.save(mc_hamburger02);
+//
+//		this.mrepository.save(chaval_cerveza01);
+//		this.mrepository.save(chaval_cerveza02);
+//
+//		this.mrepository.save(larumba_pizzas);
+//		this.mrepository.save(laruMenu_empanadas);
+//
+//		this.mrepository.save(sensei_cocinajaponesa01);
+//		this.mrepository.save(sensei_cocinajaponesa02);
 	}
 
 }
