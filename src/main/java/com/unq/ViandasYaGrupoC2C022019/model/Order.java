@@ -31,14 +31,14 @@ public class Order {
     @OneToMany
     private List<OrderItem> orderItems = new ArrayList<OrderItem>();
     @Enumerated(EnumType.ORDINAL)
-    private DispatchType dispatchType;
-    private LocalDate orderDate;
-    private LocalDate dispatchDate;
+    private DispatchType dispatchType; // tipo de entrega del pedido
+    private LocalDate orderDate;  // fecha en la que se realizo el pedido
+    private LocalDate dispatchDate; // fecha de entrega del pedido  (parametro)
     @Enumerated(EnumType.ORDINAL)
-    private OrederState state;
-    private LocalTime dispatchTime;
-    private LocalTime deliveryTime;
-    private int score = 0;
+    private OrederState state;  // estado del pedido
+    private LocalTime dispatchTime; // hora en la que se entrego el pedido
+    private LocalTime deliveryTime; // hora en la que se debe entregar el ´pedido (parametro)
+    private int score = 0;  //puntaje que se le dio al pedido
     
     public Order() {
     }

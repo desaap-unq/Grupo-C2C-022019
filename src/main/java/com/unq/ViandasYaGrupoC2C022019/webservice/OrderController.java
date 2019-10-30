@@ -21,11 +21,8 @@ public class OrderController {
 
     @PostMapping("")
     public Order createOrder(@RequestBody OrderDto orderDto) {
-        orderDto.print();
-        Order newOrder = new Order();
         
-//        return orderService.save(newOrder);
-        return newOrder;
+        return orderService.saveFromOrderDto(orderDto);
     }
   
 }
