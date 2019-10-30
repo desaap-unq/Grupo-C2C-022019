@@ -14,22 +14,22 @@ import org.springframework.data.annotation.Id;
 
 @Entity
 public class Menu implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @javax.persistence.Id
     private Long id;
-    private String name; 
+    private String name;
     private String description;
     @ElementCollection
     @CollectionTable(name = "menu_category")
-    private List<MenuCategory> category; 
+    private List<MenuCategory> category;
     private double deliveryCost;
-    private LocalDate startDate; 
+    private LocalDate startDate;
     private LocalDate dueDate;
     private LocalTime deliveryTime;
-    private LocalTime averageDeliveryTime; 
-    private double price; 
+    private LocalTime averageDeliveryTime;
+    private double price;
     private int minimumQuantity;
     private double minimumQuantityPrice;
     private int minimumQuantityTwo;
@@ -38,13 +38,13 @@ public class Menu implements Serializable {
     private boolean active;
     @ManyToOne
     private Business business;
-    
+
     public Menu(String name, String description, List<MenuCategory> category,
-                Double deliveryCost, LocalDate startDate, LocalDate dueDate, 
-                LocalTime deliveryTime, LocalTime averageDeliveryTime, Double price,
-                int minimumQuantity, Double minimumQuantityPrice, int minimumQuantityTwo,
-                Double minimumQuantityPriceTwo, int maximumAmountSalesPerDay, Business business) {
-        
+            Double deliveryCost, LocalDate startDate, LocalDate dueDate,
+            LocalTime deliveryTime, LocalTime averageDeliveryTime, Double price,
+            int minimumQuantity, Double minimumQuantityPrice, int minimumQuantityTwo,
+            Double minimumQuantityPriceTwo, int maximumAmountSalesPerDay, Business business) {
+
         this.name = name;
         this.description = description;
         this.category = category;
@@ -63,16 +63,17 @@ public class Menu implements Serializable {
         this.active = true;
     }
 
-    public Menu(){}
-    
-    public LocalTime getAverageDeliveryTime(){
+    public Menu() {
+    }
+
+    public LocalTime getAverageDeliveryTime() {
         return this.averageDeliveryTime;
     }
 
     public void setAverageDeliveryTime(LocalTime averageDeliveryTime) {
         this.averageDeliveryTime = averageDeliveryTime;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -200,7 +201,17 @@ public class Menu implements Serializable {
     public void setBusiness(Business business) {
         this.business = business;
     }
-    
-    
-    
+
+    public Double calculatePrice(int quantity) {
+        if (quantity == 1) {
+            return this.getPrice();
+        } else {
+            if (quantity >= this.minimumQuantityTwo) {
+                return quantity * minimumQuantityPriceTwo;
+            } else {
+                return quantity * minimumQuantityPrice;
+            }
+        }
+    }
+
 }

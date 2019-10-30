@@ -47,6 +47,7 @@ public class MenuServiceTest extends ApplicationTests{
         assertThat(menu.getDescription()).isEqualTo("Hamburguesa de carne con tomate y queso");
         assertThat(menu.getCategory()).containsExactly(MenuCategory.HAMBURGUESAS);
         assertTrue(menu.isActive());
+        assertNotNull(menu.getCategory().get(0));
     }
     
     @Test
