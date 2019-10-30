@@ -2,111 +2,106 @@ package com.unq.ViandasYaGrupoC2C022019.service;
 
 import static org.junit.Assert.*;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Repeat;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.unq.ViandasYaGrupoC2C022019.ApplicationTests;
 import com.unq.ViandasYaGrupoC2C022019.model.Business;
 import com.unq.ViandasYaGrupoC2C022019.model.Menu;
 import com.unq.ViandasYaGrupoC2C022019.model.MenuCategory;
 import com.unq.ViandasYaGrupoC2C022019.model.VirtualWallet;
 import com.unq.ViandasYaGrupoC2C022019.util.BusinessBuilder;
+import com.unq.ViandasYaGrupoC2C022019.util.MenuBuilder;
 import com.unq.ViandasYaGrupoC2C022019.util.VirtualWalletBuilder;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class BusinessServiceTest extends ApplicationTests {
 
-	@Autowired
-	private EntityManager entityManager;
-	@Autowired
-	private BusinessService service;
-        @Autowired
-	private MenuService menuService;
-	
-//	@Test
-//	public void testSaveASimple_Business() {
-//		Business business = new Business();
-//		Business aBusiness = new Business();
-//		
-//		business.setName("Dorita");
-//		aBusiness.setName("McDonalds");
-//		
-//		// respect the order
-//		service.save(business);
-//		service.save(aBusiness);
-//		
-//		System.out.println("Id del Negocio: " + business.getId() + " " + business.getName());
-//		System.out.println("Id del Negocio: " + aBusiness.getId() + " " + aBusiness.getName());
-//		assertNotNull(business.getId()); 	// ID 1
-//		assertNotNull(aBusiness.getId());	// ID 2
-//	}
-//	
-//	@Test
-//	public void testBuildASimple_Business_withWallet() {
-//        VirtualWallet virtualWallet = VirtualWalletBuilder.aVirtualWallet()
-//        												  .buildAndSave(entityManager);
-//		Business aBusiness = BusinessBuilder.aBusiness()
-//											.withWallet(virtualWallet)
-//											.buildAndSave(entityManager);
-//		
-//		assertNotNull(aBusiness.getId());
-//	}
-//	
-//	@Test
-//	public void testFindByBusinessId() {
-//		Business business = new Business();
-//		business.setName("Dorita");
-//		service.save(business);
-//		
-//		assertNotNull(service.findByBusinessId(business.getId()));
-//	}
-//	
-//	@Repeat(value = 10)
-//	@Test
-//	public void testFindByBusinessId_More_Business() {
-//		Business business = new Business();
-//		business.setName("Dorita");
-//		service.save(business);
-//		
-//		VirtualWallet virtualWallet = VirtualWalletBuilder.aVirtualWallet()
-//				  										  .buildAndSave(entityManager);
-//		Business aBusiness = BusinessBuilder.aBusiness()
-//											.withWallet(virtualWallet)
-//											.withName("McDonald")
-//											.buildAndSave(entityManager);
-//		
-//		Business dorita = service.findByBusinessId(business.getId());
-//		Business mcdonald = service.findByBusinessId(aBusiness.getId());
-//		
-//		assertEquals(business.getName(), dorita.getName());
-//		assertEquals(aBusiness.getName(), mcdonald.getName());
-//	}
-//	
-	@Test
-	public void testFindByCategory_Menu() {
-	List<MenuCategory> menuCategoryList = new ArrayList<>();
+    @Autowired
+    private BusinessService businessService;
+
+    @Autowired
+    EntityManager entityManager;
+
+    @Test
+    public void createBussines_WithBasicData_ABusinessWithIdNotNull() {
+        VirtualWallet virtualWallet = VirtualWalletBuilder.aVirtualWallet().buildAndSave(entityManager);
+        Business business = BusinessBuilder.aBusiness().withWallet(virtualWallet).build();
+
+        businessService.save(business);
+        assertNotNull(business.getId());
+    }
+
+    @Test
+    public void findBusinessById_WithBusinessInDataBase_ABusiness() {
+        VirtualWallet virtualWallet = VirtualWalletBuilder.aVirtualWallet().buildAndSave(entityManager);
+        Business businessSaved = BusinessBuilder.aBusiness().withWallet(virtualWallet).buildAndSave(entityManager);
+
+        assertThat(businessService.findBusinessById(businessSaved.getId()).getId()).isEqualTo(businessSaved.getId());
+
+    }
+
+    @Test
+    public void findBusinessById_WithoutBusinessInDataBase_aException() {
+
+        assertThatIllegalArgumentException()
+                .isThrownBy(() -> businessService.findBusinessById(1L))
+                .withMessage("Not found Busness with id 1");
+    }
+
+    @Test
+    public void findByCategory_existBusinessWithCategory_ListWithABusiness() {
+        List<MenuCategory> menuCategoryList = new ArrayList<>();
         menuCategoryList.add(MenuCategory.HAMBURGUESAS);
-        
+        menuCategoryList.add(MenuCategory.EMPANADAS);
+
+        VirtualWallet virtualWallet = VirtualWalletBuilder.aVirtualWallet().buildAndSave(entityManager);
+        VirtualWallet otherVirtualWallet = VirtualWalletBuilder.aVirtualWallet().buildAndSave(entityManager);
+
+        Business business = BusinessBuilder.aBusiness().withWallet(virtualWallet).buildAndSave(entityManager);
+        Business Otherbusiness = BusinessBuilder.aBusiness().withWallet(otherVirtualWallet).buildAndSave(entityManager);
+
+        Menu aMenu = MenuBuilder.aMenu().withCategories(menuCategoryList)
+                .withAverageDeliveryTime(LocalTime.of(0, 20))
+                .withDeliveryCost(0)
+                .withDeliveryTime(LocalTime.of(0, 20))
+                .withDescription("Hamburguesa de carne con tomate y queso")
+                .withDueDate(LocalDate.now())
+                .withBusiness(business).buildAndPersist(entityManager);
+
+        Menu otherMenu = MenuBuilder.aMenu().withCategories(new ArrayList<MenuCategory>()).withBusiness(Otherbusiness).buildAndPersist(entityManager);
+
+        assertThat(businessService.findByCategory(MenuCategory.HAMBURGUESAS.name())).asList().isNotEmpty().size().isEqualTo(1);
+        assertEquals(businessService.findByCategory(MenuCategory.HAMBURGUESAS.name()).get(0).getId(), business.getId());
+    }
+
+    @Test
+    public void findByCategory_notExistBusinessWithCategory_EmptyList() {
+        List<MenuCategory> menuCategoryList = new ArrayList<MenuCategory>();
+
         VirtualWallet virtualWallet = VirtualWalletBuilder.aVirtualWallet().buildAndSave(entityManager);
 
         Business business = BusinessBuilder.aBusiness().withWallet(virtualWallet).buildAndSave(entityManager);
-        
-        // builder
-        Menu menu = new Menu("Hamburguesas", "Hamburguesa de carne con tomate y queso",
-                menuCategoryList, 40D, LocalDate.now(), LocalDate.now(),
-                LocalTime.of(0, 20), LocalTime.of(0, 20), 50D, 1, 50D, 3, 120D, 100,business);
-                menuService.save(menu);
-            System.out.println(service.findByCategory(MenuCategory.HAMBURGUESAS));
-//        assertFalse(service.findByCategory(MenuCategory.HAMBURGUESAS).isEmpty());  
-	}
-	
+
+        MenuBuilder.aMenu().withCategories(menuCategoryList)
+                .withAverageDeliveryTime(LocalTime.of(0, 20))
+                .withDeliveryCost(0)
+                .withDeliveryTime(LocalTime.of(0, 20))
+                .withDescription("Hamburguesa de carne con tomate y queso")
+                .withDueDate(LocalDate.now())
+                .withBusiness(business).buildAndPersist(entityManager);
+
+        assertTrue(businessService.findByCategory(MenuCategory.HAMBURGUESAS.name()).isEmpty());
+    }
+
 }

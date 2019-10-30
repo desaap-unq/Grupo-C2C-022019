@@ -1,33 +1,35 @@
 package com.unq.ViandasYaGrupoC2C022019.webservice;
 
+import com.unq.ViandasYaGrupoC2C022019.model.Business;
+import com.unq.ViandasYaGrupoC2C022019.service.BusinessService;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.unq.ViandasYaGrupoC2C022019.model.Business;
-import com.unq.ViandasYaGrupoC2C022019.model.MenuCategory;
-import com.unq.ViandasYaGrupoC2C022019.service.BusinessService;
-
 @RestController
-@RequestMapping("/business")
+@RequestMapping("business")
+@CrossOrigin(origins = "http://localhost:3000")
 public class BusinessController {
 
-	@Autowired
-	BusinessService service;
-	
-	@GetMapping("/business/{id}")
-	public Business findByBusinessId(@PathVariable long id) {
-		Business business = service.findByBusinessId(id);
-		return business;
-	}
-	
-//	@GetMapping("/business/{comida}")
-//	public List<Business> findByBussinessName(@PathVariable String comida) {
-//		List<Business> business = service.findByCategory(comida);
-//		return null;
-//	}
+    @Autowired
+    BusinessService businessService;
+
+    @GetMapping("/{id}")
+    public Business findBusinessById(@PathVariable long id) {
+        System.err.println("no hay negocios en la bd por eso no tira error");
+        Business business = businessService.findBusinessById(id);
+        return business;
+    }
+
+    @GetMapping("/search")
+    public List<Business> findByBussinessName(@RequestParam("food") String food) {
+        System.out.println(food);
+        List<Business> business = businessService.findByCategory(food);
+        return business;
+    }
 }

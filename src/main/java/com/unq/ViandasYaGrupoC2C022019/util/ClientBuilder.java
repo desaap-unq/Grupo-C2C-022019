@@ -5,7 +5,8 @@ import javax.persistence.EntityManager;
 import com.unq.ViandasYaGrupoC2C022019.model.Client;
 import com.unq.ViandasYaGrupoC2C022019.model.VirtualWallet;
 
-public class ClientBuilder extends AbstractPersistenceBuilder<Client>{
+
+public class ClientBuilder extends AbstractPersistenceBuilder<Client> {
 
     public static ClientBuilder aClient() {
         return new ClientBuilder();
@@ -17,8 +18,8 @@ public class ClientBuilder extends AbstractPersistenceBuilder<Client>{
     private int phone = 151515;
     private String locality = "no locality";
     private String address = "no address";
-	private VirtualWallet virtualWallet = new VirtualWallet();
-
+    private VirtualWallet virtualWallet = new VirtualWallet();
+    
     public Client build() {
         Client aClient = new Client(name, surname, email, phone, locality, address);
         aClient.setWallet(virtualWallet);

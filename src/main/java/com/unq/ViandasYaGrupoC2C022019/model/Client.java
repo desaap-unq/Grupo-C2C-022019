@@ -4,104 +4,111 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToOne;
-
 import org.springframework.data.annotation.Id;
 
 @Entity
 public class Client {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@javax.persistence.Id
-	private Long id;
-	private String name;
-	private String surname;
-	private String email;
-	private int phone;
-	private String locality; // gmaps
-	private String address;  //  ""
-	@OneToOne
-	private VirtualWallet wallet;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @javax.persistence.Id
+    private Long id;
+    private String name;
+    private String surname;
+    private String email;
+    private int phone;
+    private String locality; // gmaps
+    private String address;  //  ""
+    @OneToOne
+    private VirtualWallet wallet;
 
-	public Client(String name, String surname, String email, int phone, String locality, String address) {
-		this.name = name;
-		this.surname = surname;
-		this.email = email;
-		this.phone = phone;
-		this.locality = locality;
-		this.address = address;
-		this.wallet = new VirtualWallet();
-	}
+    public Client(String name, String surname, String email, int phone, String locality, String address) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.phone = phone;
+        this.locality = locality;
+        this.address = address;
+        this.wallet = new VirtualWallet();
+    }
+    
+    public Client(){}
+    
+    public Long getId() {
+        return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getSurname() {
-		return surname;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
+    public String getSurname() {
+        return surname;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public int getPhone() {
-		return phone;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setPhone(int phone) {
-		this.phone = phone;
-	}
+    public int getPhone() {
+        return phone;
+    }
 
-	public String getLocality() {
-		return locality;
-	}
+    public void setPhone(int phone) {
+        this.phone = phone;
+    }
 
-	public void setLocality(String locality) {
-		this.locality = locality;
-	}
+    public String getLocality() {
+        return locality;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public void setLocality(String locality) {
+        this.locality = locality;
+    }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    public String getAddress() {
+        return address;
+    }
 
-	public VirtualWallet getWallet() {
-		return wallet;
-	}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-	public void setWallet(VirtualWallet wallet) {
-		this.wallet = wallet;
-	}
+    public VirtualWallet getWallet() {
+        return wallet;
+    }
 
-	public double getBalance() {
-		return this.wallet.getBalance();
-	}
+    public void setWallet(VirtualWallet wallet) {
+        this.wallet = wallet;
+    }
 
-	public void chargeCash(double amount) {
-		this.wallet.chargeCash(amount);
-	}
+    public double getBalance() {
+        return this.wallet.getBalance();
+    }
 
-	public void buyMenu(double amount) {
-		// change amount 4 Menu
-		this.wallet.buy(amount);
-	}
-	
-	
+    public void chargeCash(double amount) {
+        this.wallet.chargeCash(amount);
+    }
+
+    public void buyMenu(double amount) {
+        // change amount 4 Menu
+        this.wallet.buy(amount);
+    }
 
 }
