@@ -29,7 +29,9 @@ public class Business implements Serializable {
     @OneToOne
     private VirtualWallet wallet;
 
-    public Business(String name, String logo, String locality, String address, String location, String description, String link, String email, int phone, String schelude, String days, String delivery) {
+    public Business(String name, String logo, String locality, String address, String location, 
+    				String description, String link, String email, int phone, String schelude, 
+    				String days, String delivery) {
         this.name = name;
         this.logo = logo;
         this.locality = locality;
@@ -45,7 +47,7 @@ public class Business implements Serializable {
         this.wallet = new VirtualWallet();
     }
     
-    public Business(){}
+    public Business(){ }
     
     public Long getId() {
         return id;

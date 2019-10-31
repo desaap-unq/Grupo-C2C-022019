@@ -1,9 +1,10 @@
 package com.unq.ViandasYaGrupoC2C022019.util;
 
-import com.unq.ViandasYaGrupoC2C022019.model.Business;
+import javax.persistence.EntityManager;
+
 import com.unq.ViandasYaGrupoC2C022019.model.Client;
 import com.unq.ViandasYaGrupoC2C022019.model.VirtualWallet;
-import javax.persistence.EntityManager;
+
 
 public class ClientBuilder extends AbstractPersistenceBuilder<Client> {
 
@@ -24,21 +25,21 @@ public class ClientBuilder extends AbstractPersistenceBuilder<Client> {
         aClient.setWallet(virtualWallet);
         return aClient;
     }
-    
 
     public ClientBuilder withName(String aName) {
         this.name = aName;
         return this;
     }
     
-    public ClientBuilder withWallet(VirtualWallet virtualWallet) {
-        this.virtualWallet = virtualWallet;
-        return this;
-    }
+    public ClientBuilder withWallet(VirtualWallet vw) {
+		this.virtualWallet  = vw;
+		return this;
+	}
     
     public Client buildAndSave(EntityManager entityManager) {
-        instance =  build();
-        return super.build(entityManager);
+    	instance = build();
+    	return super.build(entityManager);
     }
     
+    //withWallet
 }

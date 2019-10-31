@@ -27,7 +27,7 @@ CREATE TABLE menu (
     business_id BIGINT NOT NULL
 );
 
-CREATE TABLE menu_category (menu_id  BIGINT NOT NULL  , category BIGINT);
+CREATE TABLE menu_category (menu_id  BIGINT NOT NULL, category VARCHAR(45));
 
 CREATE TABLE order_table_menus (order_id BIGINT , menus_id  BIGINT);
 

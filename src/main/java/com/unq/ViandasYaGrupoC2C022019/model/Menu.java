@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
@@ -23,7 +25,8 @@ public class Menu implements Serializable {
     private String description;
     @ElementCollection
     @CollectionTable(name = "menu_category")
-    private List<MenuCategory> category;
+    @Enumerated(EnumType.STRING)
+    private List<MenuCategory> category; 
     private double deliveryCost;
     private LocalDate startDate;
     private LocalDate dueDate;
