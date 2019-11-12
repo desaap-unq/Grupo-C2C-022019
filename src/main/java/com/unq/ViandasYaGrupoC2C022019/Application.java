@@ -8,6 +8,12 @@ public class Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
+		/**
+		 * command line proyect folder pom.xml 
+		 * mvn package
+		 * 	'' install
+		 * 	'' spring-boot:run
+		 */
 	}
 
 }
