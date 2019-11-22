@@ -19,7 +19,7 @@ public class ImageModel {
 	private String type;
 	@Lob
 	private byte[] data;
-	@OneToOne
+//	@OneToOne
 	private Business business;
 	
 

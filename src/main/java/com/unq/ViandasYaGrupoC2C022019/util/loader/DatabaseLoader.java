@@ -1,8 +1,11 @@
 package com.unq.ViandasYaGrupoC2C022019.util.loader;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -28,11 +31,9 @@ public class DatabaseLoader implements CommandLineRunner {
 	private VirtualWalletRepository vwrepository;
 	private BusinessRepository brepository;
 	private MenuRepository mrepository;
-	private ImageRepository irepository;
 
 	@Autowired
 	public DatabaseLoader(ClientRepository crepository,
-						 ImageRepository irepository,
 						  VirtualWalletRepository vwrepository,
 						  BusinessRepository brepository, 
 						  MenuRepository mrepository) {
@@ -40,7 +41,6 @@ public class DatabaseLoader implements CommandLineRunner {
 		this.vwrepository = vwrepository;
 		this.brepository = brepository;
 		this.mrepository = mrepository;
-		this.irepository = irepository;
 	}
 	
 	@Override
@@ -49,24 +49,24 @@ public class DatabaseLoader implements CommandLineRunner {
 		crepository.deleteAllInBatch();
 		vwrepository.deleteAllInBatch();
 		brepository.deleteAllInBatch();
-		irepository.deleteAllInBatch();
+//		irepository.deleteAllInBatch();
 		
 		//=============================================
 		
 		Client client01 = new Client("Pomelo", "Rock", "prock@user.com", 15156205, "LaFuente 2123", "Soldati");
 		VirtualWallet vwc = client01.getWallet();
 		
-		ClassPathResource imgfile = new ClassPathResource("images/nuevo-logo-mc-logo.jpg");
-		byte[] pic = new byte[(int) imgfile.contentLength()];
-		imgfile.getInputStream().read(pic);
+		File imgfile = new ClassPathResource("images/nuevo-logo-mc-logo.jpg").getFile();
+		String pic = Base64.getEncoder().withoutPadding().encodeToString(Files.readAllBytes(imgfile.toPath()));
+//		imgfile.getInputStream().read(pic);
 		
-		Business mcdonald = new Business("Mc Donald's", "path logo", "Quilmes", 
+		Business mcdonald = new Business("Mc Donald's", pic, "Quilmes", 
 								"Peatonal Rivadavia 112", "gmaps coord", 
 								"Vendemos las mejores hamburguesas", "website", 
 								"hamburguer@mcdonald.com", 15152659, "[08-23]", "LunADom", 
 								"distance min - delivery");
 		VirtualWallet vwm = mcdonald.getWallet();
-		ImageModel mcimg = new ImageModel("nuevo-logo-mc-logo", "jpg", pic, mcdonald);
+//		ImageModel mcimg = new ImageModel("nuevo-logo-mc-logo", "jpg", pic, mcdonald);
 		
 		Business mostaza = new Business("Mostaza", "path logo", "Quilmes", 
 				"Peatonal Rivadavia 112", "gmaps coord", 
@@ -176,69 +176,69 @@ public class DatabaseLoader implements CommandLineRunner {
 		this.vwrepository.save(vwm);
 		this.brepository.save(mcdonald);
 
-		this.vwrepository.save(vwmz);
-		this.brepository.save(mostaza);
-		
-		this.vwrepository.save(vwb);
-		this.brepository.save(burguerking);
-		
-		this.vwrepository.save(vwcp);
-		this.brepository.save(chavalpulperia);
-		
-		this.vwrepository.save(vwec);
-		this.brepository.save(emporiodelacerveza);
-		
-		this.vwrepository.save(vwrc);
-		this.brepository.save(rabietacerveza);
-		
-		this.vwrepository.save(vwl);
-		this.brepository.save(larumba);
-
-		this.vwrepository.save(vwlf);
-		this.brepository.save(lafarola);
-
-		this.vwrepository.save(vwlt);
-		this.brepository.save(latanita);
-
-		
-		this.vwrepository.save(vws);
-		this.brepository.save(senseirestaurant);
+//		this.vwrepository.save(vwmz);
+//		this.brepository.save(mostaza);
+//		
+//		this.vwrepository.save(vwb);
+//		this.brepository.save(burguerking);
+//		
+//		this.vwrepository.save(vwcp);
+//		this.brepository.save(chavalpulperia);
+//		
+//		this.vwrepository.save(vwec);
+//		this.brepository.save(emporiodelacerveza);
+//		
+//		this.vwrepository.save(vwrc);
+//		this.brepository.save(rabietacerveza);
+//		
+//		this.vwrepository.save(vwl);
+//		this.brepository.save(larumba);
+//
+//		this.vwrepository.save(vwlf);
+//		this.brepository.save(lafarola);
+//
+//		this.vwrepository.save(vwlt);
+//		this.brepository.save(latanita);
+//
+//		
+//		this.vwrepository.save(vws);
+//		this.brepository.save(senseirestaurant);
 //		
 		// Menu
 		
-		this.mrepository.save(mc_hamburger01);
-		this.mrepository.save(mc_hamburger02);
-
-		this.mrepository.save(mz_hamburger01);
-		this.mrepository.save(mz_hamburger02);
-		
-		this.mrepository.save(bk_hamburger01);
-		this.mrepository.save(bk_hamburger02);
-		
-		this.mrepository.save(chaval_cerveza01);
-		this.mrepository.save(chaval_cerveza02);
-		
-		this.mrepository.save(emporio_cerveza01);
-		this.mrepository.save(emporio_cerveza02);
-		
-		this.mrepository.save(rabieta_cerveza01);
-		this.mrepository.save(rabieta_cerveza02);
-
-		this.mrepository.save(larumba_pizzas);
-		this.mrepository.save(larumba_empanadas);
-
-		this.mrepository.save(lafarola_pizzas);
-		this.mrepository.save(lafarola_empanadas);
-
-		this.mrepository.save(latanita_combo1);
-		this.mrepository.save(latanita_empanadas);
-
-		this.mrepository.save(sensei_cocinajaponesa01);
-		this.mrepository.save(sensei_cocinajaponesa02);
+//		this.mrepository.save(mc_hamburger01);
+//		this.mrepository.save(mc_hamburger02);
+//
+//		this.mrepository.save(mz_hamburger01);
+//		this.mrepository.save(mz_hamburger02);
+//		
+//		this.mrepository.save(bk_hamburger01);
+//		this.mrepository.save(bk_hamburger02);
+//		
+//		this.mrepository.save(chaval_cerveza01);
+//		this.mrepository.save(chaval_cerveza02);
+//		
+//		this.mrepository.save(emporio_cerveza01);
+//		this.mrepository.save(emporio_cerveza02);
+//		
+//		this.mrepository.save(rabieta_cerveza01);
+//		this.mrepository.save(rabieta_cerveza02);
+//
+//		this.mrepository.save(larumba_pizzas);
+//		this.mrepository.save(larumba_empanadas);
+//
+//		this.mrepository.save(lafarola_pizzas);
+//		this.mrepository.save(lafarola_empanadas);
+//
+//		this.mrepository.save(latanita_combo1);
+//		this.mrepository.save(latanita_empanadas);
+//
+//		this.mrepository.save(sensei_cocinajaponesa01);
+//		this.mrepository.save(sensei_cocinajaponesa02);
 		
 		// Image
 		
-		this.irepository.save(mcimg);
+//		this.irepository.save(mcimg);
 	}
 
 }

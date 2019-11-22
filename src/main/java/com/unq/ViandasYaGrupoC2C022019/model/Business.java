@@ -1,10 +1,16 @@
 package com.unq.ViandasYaGrupoC2C022019.model;
 
 import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
 
 @Entity
@@ -15,6 +21,7 @@ public class Business implements Serializable {
     @javax.persistence.Id
     private Long id;
     private String name;
+    @Lob
     private String logo;
     private String locality;
     private int phone;
