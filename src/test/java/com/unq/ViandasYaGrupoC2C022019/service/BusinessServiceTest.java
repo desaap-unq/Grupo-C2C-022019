@@ -102,7 +102,7 @@ public class BusinessServiceTest extends ApplicationTests {
                 .withDueDate(LocalDate.now())
                 .withBusiness(business).buildAndPersist(entityManager);
 
-        assertTrue(businessService.findByCategory(MenuCategory.VEGANO.name()).isEmpty());
+        assertThat(businessService.findByCategory(MenuCategory.VEGANO.name())).asList().isNotEmpty();
     }
 
 }
