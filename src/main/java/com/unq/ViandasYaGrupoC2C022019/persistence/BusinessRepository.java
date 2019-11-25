@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface BusinessRepository extends JpaRepository<Business, Long>{
-    
-    @Query("select distinct m.business from Menu m join m.category c where c = :food")
+    																	// c.value like 
+    @Query("select distinct m.business from Menu m right join m.category c on c = :food")
 	List<Business> findByMenuCategory(@Param("food") MenuCategory food);
 }
