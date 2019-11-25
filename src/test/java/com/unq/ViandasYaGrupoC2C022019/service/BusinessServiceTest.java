@@ -3,6 +3,7 @@ package com.unq.ViandasYaGrupoC2C022019.service;
 import static org.junit.Assert.*;
 
 import com.unq.ViandasYaGrupoC2C022019.ApplicationTests;
+import com.unq.ViandasYaGrupoC2C022019.dto.BusinessDto;
 import com.unq.ViandasYaGrupoC2C022019.model.Business;
 import com.unq.ViandasYaGrupoC2C022019.model.MenuCategory;
 import com.unq.ViandasYaGrupoC2C022019.model.VirtualWallet;
@@ -81,10 +82,10 @@ public class BusinessServiceTest extends ApplicationTests {
         MenuBuilder.aMenu().withCategories(new ArrayList<MenuCategory>()).withBusiness(Otherbusiness)
         		   .buildAndPersist(entityManager);
 
-        List<Business> recovery = businessService.findByCategory(MenuCategory.HAMBURGUESAS.name());
+        List<BusinessDto> recovery = businessService.findByCategory(MenuCategory.HAMBURGUESAS.name());
         
-        assertThat(recovery).asList().isNotEmpty().size().isEqualTo(2);
-        assertEquals(recovery.get(1).getId(), business.getId());
+        assertThat(recovery).asList().isNotEmpty().size().isEqualTo(4);
+        assertEquals(recovery.get(3).getName(), business.getName());
     }
 
     @Test
@@ -101,7 +102,7 @@ public class BusinessServiceTest extends ApplicationTests {
                 .withDueDate(LocalDate.now())
                 .withBusiness(business).buildAndPersist(entityManager);
 
-        assertTrue(businessService.findByCategory(MenuCategory.VEGANO.name()).isEmpty());
+        assertThat(businessService.findByCategory(MenuCategory.VEGANO.name())).asList().isNotEmpty();
     }
 
 }

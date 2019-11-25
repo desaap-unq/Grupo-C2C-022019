@@ -1,5 +1,6 @@
 package com.unq.ViandasYaGrupoC2C022019.service;
 
+import com.unq.ViandasYaGrupoC2C022019.dto.BusinessDto;
 import com.unq.ViandasYaGrupoC2C022019.model.Business;
 import com.unq.ViandasYaGrupoC2C022019.model.MenuCategory;
 import com.unq.ViandasYaGrupoC2C022019.persistence.BusinessRepository;
@@ -28,7 +29,7 @@ public class BusinessService {
         return this.businessRepository.findById(businessId).get();
     }
 
-    public List<Business> findByCategory(String menuCategory) {
+    public List<BusinessDto> findByCategory(String menuCategory) {
        Arrays.asList(MenuCategory.values()).stream().map(category -> category.toString()).collect(Collectors.toList()).contains(menuCategory.toUpperCase());
        Assert.isTrue(Arrays.asList(MenuCategory.values()).stream().map(category -> category.toString()).collect(Collectors.toList()).contains(menuCategory.toUpperCase())
        , ("Not found food with name ".concat(menuCategory)));

@@ -1,10 +1,18 @@
 package com.unq.ViandasYaGrupoC2C022019.model;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+import java.nio.file.Files;
+import java.util.Base64;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
+
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.annotation.Id;
 
 @Entity
@@ -15,6 +23,7 @@ public class Business implements Serializable {
     @javax.persistence.Id
     private Long id;
     private String name;
+    @Lob
     private String logo;
     private String locality;
     private int phone;
@@ -176,5 +185,22 @@ public class Business implements Serializable {
     public double removeCash(int amount) {
         return this.wallet.removeCash(amount);
     }
+
+	public void decode(String logo64) {
+		byte[] decodedBytes = Base64.getDecoder().decode(logo64);
+		String decodedString = new String(decodedBytes);
+	}
+	
+	public void encode() {
+		File imgfile;
+		String pic = "";
+		try {
+			imgfile = new ClassPathResource(this.logo).getFile();
+			pic = Base64.getEncoder().withoutPadding().encodeToString(Files.readAllBytes(imgfile.toPath()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		this.logo = pic;
+	}
 
 }
