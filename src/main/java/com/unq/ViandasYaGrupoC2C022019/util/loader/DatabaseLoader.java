@@ -1,26 +1,20 @@
 package com.unq.ViandasYaGrupoC2C022019.util.loader;
 
-import java.io.File;
-import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
-import java.util.Base64;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import com.unq.ViandasYaGrupoC2C022019.model.Business;
 import com.unq.ViandasYaGrupoC2C022019.model.Client;
-import com.unq.ViandasYaGrupoC2C022019.model.ImageModel;
 import com.unq.ViandasYaGrupoC2C022019.model.Menu;
 import com.unq.ViandasYaGrupoC2C022019.model.MenuCategory;
 import com.unq.ViandasYaGrupoC2C022019.model.VirtualWallet;
 import com.unq.ViandasYaGrupoC2C022019.persistence.BusinessRepository;
 import com.unq.ViandasYaGrupoC2C022019.persistence.ClientRepository;
-import com.unq.ViandasYaGrupoC2C022019.persistence.ImageRepository;
 import com.unq.ViandasYaGrupoC2C022019.persistence.MenuRepository;
 import com.unq.ViandasYaGrupoC2C022019.persistence.VirtualWalletRepository;
 
@@ -49,74 +43,79 @@ public class DatabaseLoader implements CommandLineRunner {
 		crepository.deleteAllInBatch();
 		vwrepository.deleteAllInBatch();
 		brepository.deleteAllInBatch();
-//		irepository.deleteAllInBatch();
+		mrepository.deleteAllInBatch();
 		
 		//=============================================
 		
 		Client client01 = new Client("Pomelo", "Rock", "prock@user.com", 15156205, "LaFuente 2123", "Soldati");
 		VirtualWallet vwc = client01.getWallet();
 		
-		File imgfile = new ClassPathResource("images/nuevo-logo-mc-logo.jpg").getFile();
-		String pic = Base64.getEncoder().withoutPadding().encodeToString(Files.readAllBytes(imgfile.toPath()));
-//		imgfile.getInputStream().read(pic);
-		
-		Business mcdonald = new Business("Mc Donald's", pic, "Quilmes", 
+		Business mcdonald = new Business("Mc Donald's", "images/nuevo-logo-mc-logo.jpg", "Quilmes", 
 								"Peatonal Rivadavia 112", "gmaps coord", 
 								"Vendemos las mejores hamburguesas", "website", 
 								"hamburguer@mcdonald.com", 15152659, "[08-23]", "LunADom", 
 								"distance min - delivery");
 		VirtualWallet vwm = mcdonald.getWallet();
-//		ImageModel mcimg = new ImageModel("nuevo-logo-mc-logo", "jpg", pic, mcdonald);
+		mcdonald.encode();
 		
-		Business mostaza = new Business("Mostaza", "path logo", "Quilmes", 
+		Business mostaza = new Business("Mostaza", "images/mostaza-nuevologo-ar.jpg", "Quilmes", 
 				"Peatonal Rivadavia 112", "gmaps coord", 
 				"Hamburguesas de verdad", "website", 
 				"hamburguer@mostaza.com", 15152659, "[08-23]", "LunADom", 
 				"distance min - delivery");
 		VirtualWallet vwmz = mostaza.getWallet();
+		mostaza.encode();
 
-		Business burguerking = new Business("Burger King", "path logo", "Quilmes", 
+		Business burguerking = new Business("Burger King", "images/burger-king-logo-original.jpg", "Quilmes", 
 				"Peatonal Rivadavia 112", "gmaps coord", 
 				"Sabor superior desde 1954", "website", 
 				"hamburguer@burguerking.com", 15152659, "[08-23]", "LunADom", 
 				"distance min - delivery");
 		VirtualWallet vwb = burguerking.getWallet();
+		burguerking.encode();
 		
-		Business chavalpulperia = new Business("Chaval Pulperia", "path Logo", "Palermo", "Niceto Vega 4691",
+		Business chavalpulperia = new Business("Chaval Pulperia", "images/chaval-logo.png", "Palermo", "Niceto Vega 4691",
 											"gmaps coord", "Cerveceria Artesanal", "website", "chaval@gmail.com", 
 											15487856, "[18-23]", "LunASab", "distance min - delivery");
 		VirtualWallet vwcp = chavalpulperia.getWallet();
+		chavalpulperia.encode();
 		
-		Business emporiodelacerveza = new Business("Emporio de la Cerveza", "path Logo", "Palermo", "Niceto Vega 4691",
+		Business emporiodelacerveza = new Business("Emporio de la Cerveza", "images/emporio-logo.jpg", "Palermo", "Niceto Vega 4691",
 				"gmaps coord", "Una pequenia cueva en Caballito Norte", "website", "emporiocerveza@gmail.com", 
 				15487856, "[18-23]", "LunASab", "distance min - delivery");
 		VirtualWallet vwec = emporiodelacerveza.getWallet();
+		emporiodelacerveza.encode();
 
-		Business rabietacerveza = new Business("Rabieta Cerveza", "path Logo", "Palermo", "Niceto Vega 4691",
+		Business rabietacerveza = new Business("Rabieta Cerveza", "images/rabieta-logo.png", "Palermo", "Niceto Vega 4691",
 				"gmaps coord", "Cerveceria Artesanal Malcriada", "website", "rabietacerverza@gmail.com", 
 				15487856, "[18-23]", "LunASab", "distance min - delivery");
 		VirtualWallet vwrc = rabietacerveza.getWallet();
+		rabietacerveza.encode();
 		
-		Business larumba = new Business("La Rumba", "path Logo", "Pompeya", "Av Saenz 1510", "gmaps coord", 
+		Business larumba = new Business("La Rumba", "images/larumba-logo.jpg", "Pompeya", "Av Saenz 1510", "gmaps coord", 
 										"La mejor comida casera", "website", "larumba@outlock.com", 
 										15231259, "[09-23]", "MarADom", "distance min - delivery");
 		VirtualWallet vwl = larumba.getWallet();
-		
-		Business lafarola = new Business("La Farola", "path Logo", "Pompeya", "Av Saenz 1510", "gmaps coord", 
+		larumba.encode();
+
+		Business lafarola = new Business("La Farola", "images/farolalogonuevo.jpg", "Pompeya", "Av Saenz 1510", "gmaps coord", 
 				"La mejor comida casera", "website", "lafarola@outlock.com", 
 				15231259, "[09-23]", "MarADom", "distance min - delivery");
 		VirtualWallet vwlf = lafarola.getWallet();
+		lafarola.encode();
 
-		Business latanita = new Business("La Tanita", "path Logo", "Pompeya", "Av Saenz 1510", "gmaps coord", 
+		Business latanita = new Business("La Tanita", "images/latanita-logo.jpg", "Pompeya", "Av Saenz 1510", "gmaps coord", 
 				"Pastas Caseras", "website", "larumba@outlock.com", 
 				15231259, "[09-23]", "MarADom", "distance min - delivery");
 		VirtualWallet vwlt = latanita.getWallet();
+		latanita.encode();
 		
-		Business senseirestaurant = new Business("Sensei Restaurant", "path Logo", "Lomas de Zamora", "Espania 398",
+		Business senseirestaurant = new Business("Sensei Restaurant", "images/sensei-logo.png", "Lomas de Zamora", "Espania 398",
 												"gmaps coord", "Comida del medio oriente", "website", "sensei@yahoo.com", 
 												15569854, "[20-02]", "JueADom", "distance min - delivery");
 		VirtualWallet vws = senseirestaurant.getWallet();
-//		
+		senseirestaurant.encode();
+		
 		// LocalTime UTC-3
 		Menu mc_hamburger01 = new Menu("Doble Cuarto", "Doble carne, doble queso", Arrays.asList(MenuCategory.HAMBURGUESAS), 0d, LocalDate.now(), 
 										LocalDate.now(), LocalTime.of(21, 20), LocalTime.of(21, 20), 250d, 1, 10d, 2, 20d, 20, mcdonald);
@@ -176,69 +175,65 @@ public class DatabaseLoader implements CommandLineRunner {
 		this.vwrepository.save(vwm);
 		this.brepository.save(mcdonald);
 
-//		this.vwrepository.save(vwmz);
-//		this.brepository.save(mostaza);
-//		
-//		this.vwrepository.save(vwb);
-//		this.brepository.save(burguerking);
-//		
-//		this.vwrepository.save(vwcp);
-//		this.brepository.save(chavalpulperia);
-//		
-//		this.vwrepository.save(vwec);
-//		this.brepository.save(emporiodelacerveza);
-//		
-//		this.vwrepository.save(vwrc);
-//		this.brepository.save(rabietacerveza);
-//		
-//		this.vwrepository.save(vwl);
-//		this.brepository.save(larumba);
-//
-//		this.vwrepository.save(vwlf);
-//		this.brepository.save(lafarola);
-//
-//		this.vwrepository.save(vwlt);
-//		this.brepository.save(latanita);
-//
-//		
-//		this.vwrepository.save(vws);
-//		this.brepository.save(senseirestaurant);
-//		
+		this.vwrepository.save(vwmz);
+		this.brepository.save(mostaza);
+		
+		this.vwrepository.save(vwb);
+		this.brepository.save(burguerking);
+		
+		this.vwrepository.save(vwcp);
+		this.brepository.save(chavalpulperia);
+		
+		this.vwrepository.save(vwec);
+		this.brepository.save(emporiodelacerveza);
+		
+		this.vwrepository.save(vwrc);
+		this.brepository.save(rabietacerveza);
+		
+		this.vwrepository.save(vwl);
+		this.brepository.save(larumba);
+
+		this.vwrepository.save(vwlf);
+		this.brepository.save(lafarola);
+
+		this.vwrepository.save(vwlt);
+		this.brepository.save(latanita);
+
+		this.vwrepository.save(vws);
+		this.brepository.save(senseirestaurant);
+		
 		// Menu
 		
-//		this.mrepository.save(mc_hamburger01);
-//		this.mrepository.save(mc_hamburger02);
-//
-//		this.mrepository.save(mz_hamburger01);
-//		this.mrepository.save(mz_hamburger02);
-//		
-//		this.mrepository.save(bk_hamburger01);
-//		this.mrepository.save(bk_hamburger02);
-//		
-//		this.mrepository.save(chaval_cerveza01);
-//		this.mrepository.save(chaval_cerveza02);
-//		
-//		this.mrepository.save(emporio_cerveza01);
-//		this.mrepository.save(emporio_cerveza02);
-//		
-//		this.mrepository.save(rabieta_cerveza01);
-//		this.mrepository.save(rabieta_cerveza02);
-//
-//		this.mrepository.save(larumba_pizzas);
-//		this.mrepository.save(larumba_empanadas);
-//
-//		this.mrepository.save(lafarola_pizzas);
-//		this.mrepository.save(lafarola_empanadas);
-//
-//		this.mrepository.save(latanita_combo1);
-//		this.mrepository.save(latanita_empanadas);
-//
-//		this.mrepository.save(sensei_cocinajaponesa01);
-//		this.mrepository.save(sensei_cocinajaponesa02);
+		this.mrepository.save(mc_hamburger01);
+		this.mrepository.save(mc_hamburger02);
+
+		this.mrepository.save(mz_hamburger01);
+		this.mrepository.save(mz_hamburger02);
 		
-		// Image
+		this.mrepository.save(bk_hamburger01);
+		this.mrepository.save(bk_hamburger02);
 		
-//		this.irepository.save(mcimg);
+		this.mrepository.save(chaval_cerveza01);
+		this.mrepository.save(chaval_cerveza02);
+		
+		this.mrepository.save(emporio_cerveza01);
+		this.mrepository.save(emporio_cerveza02);
+		
+		this.mrepository.save(rabieta_cerveza01);
+		this.mrepository.save(rabieta_cerveza02);
+
+		this.mrepository.save(larumba_pizzas);
+		this.mrepository.save(larumba_empanadas);
+
+		this.mrepository.save(lafarola_pizzas);
+		this.mrepository.save(lafarola_empanadas);
+
+		this.mrepository.save(latanita_combo1);
+		this.mrepository.save(latanita_empanadas);
+
+		this.mrepository.save(sensei_cocinajaponesa01);
+		this.mrepository.save(sensei_cocinajaponesa02);
+		
 	}
 
 }
