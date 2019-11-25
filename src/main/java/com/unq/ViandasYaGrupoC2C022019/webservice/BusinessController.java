@@ -1,5 +1,6 @@
 package com.unq.ViandasYaGrupoC2C022019.webservice;
 
+import com.unq.ViandasYaGrupoC2C022019.dto.BusinessDto;
 import com.unq.ViandasYaGrupoC2C022019.model.Business;
 import com.unq.ViandasYaGrupoC2C022019.service.BusinessService;
 import java.util.List;
@@ -26,9 +27,8 @@ public class BusinessController {
     }
 
     @GetMapping("/search/{food}")
-    public List<Business> findByBussinessName(@PathVariable String food) {
+    public List<BusinessDto> findByBussinessName(@PathVariable String food) {
         System.out.println(food);
-        List<Business> business = businessService.findByCategory(food);
-        return business;
+        return businessService.findByCategory(food);
     }
 }
