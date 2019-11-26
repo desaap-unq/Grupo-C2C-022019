@@ -10,6 +10,7 @@ public class BusinessDto {
 	private String days;
 	private String description;
 	private String link;
+	private Long id;
 
 	public BusinessDto() {	}
 	
@@ -19,7 +20,8 @@ public class BusinessDto {
 		this.description = description;
 	}
 	
-	public BusinessDto(String name, String logo, String locality, String address, int phone, String days, String description, String link) {
+	public BusinessDto(Long id, String name, String logo, String locality, String address, int phone, String days, String description, String link) {
+		this.id = id;
 		this.name = name;
 		this.logo = logo;
 		this.locality = locality;
@@ -92,5 +94,13 @@ public class BusinessDto {
 
 	public void setLink(String link) {
 		this.link = link;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 }
