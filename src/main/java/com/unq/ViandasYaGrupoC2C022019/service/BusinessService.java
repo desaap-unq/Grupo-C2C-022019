@@ -3,7 +3,10 @@ package com.unq.ViandasYaGrupoC2C022019.service;
 import com.unq.ViandasYaGrupoC2C022019.dto.BusinessDto;
 import com.unq.ViandasYaGrupoC2C022019.model.Business;
 import com.unq.ViandasYaGrupoC2C022019.model.MenuCategory;
+import com.unq.ViandasYaGrupoC2C022019.model.VirtualWallet;
 import com.unq.ViandasYaGrupoC2C022019.persistence.BusinessRepository;
+import com.unq.ViandasYaGrupoC2C022019.persistence.VirtualWalletRepository;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,9 +18,14 @@ import org.springframework.util.Assert;
 public class BusinessService {
     @Autowired
     private final BusinessRepository businessRepository;
+    
+    @Autowired
+    private final VirtualWalletRepository vwRepository;
 
-    public BusinessService(BusinessRepository businessRepository) {
+    public BusinessService(BusinessRepository businessRepository,
+    					   VirtualWalletRepository vwRepository) {
         this.businessRepository = businessRepository;
+        this.vwRepository = vwRepository;
     }
 
     public Business save(Business aBusiness) {
@@ -36,4 +44,19 @@ public class BusinessService {
 
         return this.businessRepository.findByMenuCategory(MenuCategory.valueOf(menuCategory.toUpperCase()));
     }
+
+	public Business saveFromBusinessDto(BusinessDto business) {
+		
+		//validate business
+		Business web = new Business(business);
+		VirtualWallet vw = web.getWallet();
+		
+		this.getVwRepository().save(vw);
+		
+		return this.save(web);
+	}
+
+	public VirtualWalletRepository getVwRepository() {
+		return vwRepository;
+	}
 }

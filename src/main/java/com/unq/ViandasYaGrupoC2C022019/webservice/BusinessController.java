@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +23,7 @@ public class BusinessController {
 
     @GetMapping("/{id}")
     public Business findBusinessById(@PathVariable long id) {
-        System.err.println("no hay negocios en la bd por eso no tira error");
+        System.out.println("no hay negocios en la bd por eso no tira error");
         Business business = businessService.findBusinessById(id);
         return business;
     }
@@ -30,5 +32,13 @@ public class BusinessController {
     public List<BusinessDto> findByBussinessName(@PathVariable String food) {
         System.out.println(food);
         return businessService.findByCategory(food);
+    }
+    
+    @PostMapping(value = "/add", consumes = "application/json")
+    public Business createBusiness(@RequestBody BusinessDto business) {
+    	System.out.println("save business");
+    	System.out.println(business.getName());
+    	System.out.println(business.getLogo());
+		return businessService.saveFromBusinessDto(business);
     }
 }

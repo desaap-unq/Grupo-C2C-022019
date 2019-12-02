@@ -15,6 +15,8 @@ import javax.persistence.OneToOne;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.annotation.Id;
 
+import com.unq.ViandasYaGrupoC2C022019.dto.BusinessDto;
+
 @Entity
 public class Business implements Serializable {
 
@@ -58,7 +60,19 @@ public class Business implements Serializable {
     
     public Business(){ }
     
-    public Long getId() {
+    public Business(BusinessDto business) {
+		this.name = business.getName();
+		this.logo = business.getLogo();
+		this.locality = business.getLocality();
+		this.address = business.getAddress();
+		this.phone = business.getPhone();
+		this.days = business.getDays();
+		this.description = business.getDescription();
+		this.link = business.getLink();
+		this.wallet = new VirtualWallet();
+	}
+
+	public Long getId() {
         return id;
     }
 
