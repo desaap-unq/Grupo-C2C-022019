@@ -21,14 +21,12 @@ public class BusinessController {
 
     @GetMapping("/{id}")
     public Business findBusinessById(@PathVariable long id) {
-        System.err.println("no hay negocios en la bd por eso no tira error");
         Business business = businessService.findBusinessById(id);
         return business;
     }
 
     @GetMapping("/search/{food}")
     public List<BusinessDto> findByBussinessName(@PathVariable String food) {
-        System.out.println(food);
         return businessService.findByCategory(food);
     }
 }
