@@ -23,22 +23,17 @@ public class BusinessController {
 
     @GetMapping("/{id}")
     public Business findBusinessById(@PathVariable long id) {
-        System.out.println("no hay negocios en la bd por eso no tira error");
         Business business = businessService.findBusinessById(id);
         return business;
     }
 
     @GetMapping("/search/{food}")
     public List<BusinessDto> findByBussinessName(@PathVariable String food) {
-        System.out.println(food);
         return businessService.findByCategory(food);
     }
     
     @PostMapping(value = "/add", consumes = "application/json")
     public Business createBusiness(@RequestBody BusinessDto business) {
-    	System.out.println("save business");
-    	System.out.println(business.getName());
-    	System.out.println(business.getLogo());
 		return businessService.saveFromBusinessDto(business);
     }
 }
