@@ -1,5 +1,6 @@
 package com.unq.ViandasYaGrupoC2C022019.service;
 
+import com.unq.ViandasYaGrupoC2C022019.model.Business;
 import com.unq.ViandasYaGrupoC2C022019.model.Menu;
 import com.unq.ViandasYaGrupoC2C022019.persistence.MenuRepository;
 import java.util.List;
@@ -26,5 +27,9 @@ public class MenuService {
     public List<Menu> findByBusinessId(Long idBusiness){
         return menuRepository.findByBusinessId(idBusiness);
     }
+
+	public void setMenu2Business(Menu menu, Business business) {
+		menu.setBusiness(business);
+	}
    
 }

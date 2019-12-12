@@ -4,10 +4,14 @@ import com.unq.ViandasYaGrupoC2C022019.dto.BusinessDto;
 import com.unq.ViandasYaGrupoC2C022019.model.Business;
 import com.unq.ViandasYaGrupoC2C022019.model.MenuCategory;
 import java.util.List;
+
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+@Transactional
 public interface BusinessRepository extends JpaRepository<Business, Long>{
 	String properties = "m.business.id, m.business.name, m.business.logo, m.business.locality, m.business.address, m.business.phone, m.business.days, m.business.description, m.business.link";
 	String businessDto = "select distinct new com.unq.ViandasYaGrupoC2C022019.dto.BusinessDto("+properties+")";

@@ -34,7 +34,7 @@ public class MenuController {
     @PostMapping("/business/{id}")
     public Menu createMenu(@RequestBody Menu menu, @PathVariable long id) {
         Business business = businessService.findBusinessById(id);
-        menu.setBusiness(business);
+        menuService.setMenu2Business(menu, business);
         return menuService.save(menu);
     }
     
