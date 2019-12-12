@@ -32,7 +32,6 @@ public class menuTest {
 
         List<MenuCategory> menuCategoryList = new ArrayList<>();
         menuCategoryList.add(MenuCategory.HAMBURGUESAS);
-        Business business = BusinessBuilder.aBusiness().build();
 
         Menu menu = MenuBuilder.aMenu().withCategories(menuCategoryList)
                 .withAverageDeliveryTime(LocalTime.of(0, 20))

@@ -1,7 +1,5 @@
 package com.unq.ViandasYaGrupoC2C022019.architecture;
 
-import static org.junit.Assert.*;
-
 import java.lang.annotation.Annotation;
 
 import javax.persistence.EntityManager;
