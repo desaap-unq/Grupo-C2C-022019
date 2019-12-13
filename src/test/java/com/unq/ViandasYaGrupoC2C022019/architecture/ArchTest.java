@@ -3,10 +3,10 @@ package com.unq.ViandasYaGrupoC2C022019.architecture;
 import java.lang.annotation.Annotation;
 
 import javax.persistence.EntityManager;
-import javax.transaction.Transaction;
 
 import org.junit.Test;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
@@ -83,7 +83,7 @@ public class ArchTest {
 		
 		ArchRule rule = classes()
 							.that().areAssignableTo(EntityManager.class)
-							.should().onlyBeAccessed().byClassesThat().areAnnotatedWith((Class<? extends Annotation>) Transaction.class);
+							.should().onlyBeAccessed().byClassesThat().areAnnotatedWith((Class<? extends Annotation>) Transactional.class);
 		
 		rule.check(importClasses);
 	}
