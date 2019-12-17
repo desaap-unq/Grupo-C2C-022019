@@ -2,11 +2,13 @@ package com.unq.ViandasYaGrupoC2C022019.service;
 
 import com.unq.ViandasYaGrupoC2C022019.dto.ItemDto;
 import com.unq.ViandasYaGrupoC2C022019.dto.OrderDto;
+import com.unq.ViandasYaGrupoC2C022019.model.Business;
 import com.unq.ViandasYaGrupoC2C022019.model.Client;
 import com.unq.ViandasYaGrupoC2C022019.model.DispatchType;
 import com.unq.ViandasYaGrupoC2C022019.model.Menu;
 import com.unq.ViandasYaGrupoC2C022019.model.Order;
 import com.unq.ViandasYaGrupoC2C022019.model.OrderItem;
+import com.unq.ViandasYaGrupoC2C022019.model.VirtualWallet;
 import com.unq.ViandasYaGrupoC2C022019.persistence.ClientRepository;
 import com.unq.ViandasYaGrupoC2C022019.persistence.MenuRepository;
 import com.unq.ViandasYaGrupoC2C022019.persistence.OrderItemRepository;
@@ -44,7 +46,6 @@ public class OrderService {
 
     public Order saveFromOrderDto(OrderDto aOrderdto) {
         validate(aOrderdto);
-        
         Client client = clientRepository.findById(aOrderdto.getClientId()).get();
 
         List<OrderItem> orderItems = new ArrayList<OrderItem>();
@@ -54,7 +55,9 @@ public class OrderService {
         orderItems = itemsDto.stream().map((item) -> this.convertDtoToItem(item.getMenuId(), item.getQuantity())).collect(Collectors.toList());
         orderItems.forEach(item -> orderItemRepository.save(item));
 
-        Order newOrder = new Order();
+        Order newOrder = new Order(client,orderItems.get(0).getMenu().getBusiness(),
+        orderItems,aOrderdto.getDelivery(),aOrderdto.getDispatchDate(),
+        aOrderdto.getDeliveryTime() );
 
         newOrder.setClient(client);
         newOrder.setOrderItems(orderItems);
@@ -71,6 +74,10 @@ public class OrderService {
 
         newOrder.setOrderDate(LocalDate.now());
 
+        validateBuy(client.getWallet(),newOrder);
+        
+        chargeMoney(client.getWallet(),orderItems.get(0).getMenu().getBusiness(),newOrder);
+        
         return orderRepository.save(newOrder);
     }
 
@@ -84,8 +91,21 @@ public class OrderService {
         aOrderDto.getItems().forEach(item -> validateItems(item));
     }
     
+    private void validateBuy(VirtualWallet wallet,Order order ){
+        Assert.isTrue(wallet.getBalance() >= order.getTotalPrice() , ("Insufficient money"));
+    }
+    
     private void validateItems(ItemDto itemDto){
         Assert.isTrue(menuRepository.existsById(itemDto.getMenuId()), ("Not found Menu with id ".concat(itemDto.getMenuId().toString())));
         Assert.isTrue((itemDto.getQuantity()) > 0,("Invalid quantity"));
     }
+    public  List<Order> findByClientId(long id) {
+        return this.orderRepository.findByClientId(id);
+    }
+
+    private void chargeMoney(VirtualWallet wallet,Business business ,Order newOrder) {
+        wallet.buy(newOrder.getTotalPrice());
+        business.getWallet().sale(newOrder.getTotalPrice());
+    }
+    
 }
