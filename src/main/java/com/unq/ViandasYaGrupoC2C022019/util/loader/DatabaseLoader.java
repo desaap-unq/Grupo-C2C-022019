@@ -49,7 +49,8 @@ public class DatabaseLoader implements CommandLineRunner {
 		
 		Client client01 = new Client("Pomelo", "Rock", "prock@user.com", 15156205, "LaFuente 2123", "Soldati");
 		VirtualWallet vwc = client01.getWallet();
-		
+		vwc.setBalance(1000);
+                
 		Business mcdonald = new Business("Mc Donald's", "images/nuevo-logo-mc-logo.jpg", "Quilmes", 
 								"Peatonal Rivadavia 112", "gmaps coord", 
 								"Vendemos las mejores hamburguesas", "website", 

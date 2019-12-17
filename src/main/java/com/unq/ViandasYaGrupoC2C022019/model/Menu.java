@@ -9,6 +9,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
@@ -39,7 +40,7 @@ public class Menu implements Serializable {
     private double minimumQuantityPriceTwo;
     private int maximumAmountSalesPerDay;
     private boolean active;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Business business;
 
     public Menu(String name, String description, List<MenuCategory> category,
@@ -209,11 +210,12 @@ public class Menu implements Serializable {
         if (quantity == 1) {
             return this.getPrice();
         } else {
-            if (quantity >= this.minimumQuantityTwo) {
-                return quantity * minimumQuantityPriceTwo;
-            } else {
-                return quantity * minimumQuantityPrice;
-            }
+//            if (quantity >= this.minimumQuantityTwo) {
+//                return quantity * minimumQuantityPriceTwo;
+//            } else {
+//                return quantity * minimumQuantityPrice;
+//            }
+            return this.getPrice()* quantity;
         }
     }
 

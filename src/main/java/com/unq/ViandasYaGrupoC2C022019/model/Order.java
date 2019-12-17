@@ -5,7 +5,6 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -39,6 +38,8 @@ public class Order {
     private LocalTime dispatchTime; // hora en la que se entrego el pedido
     private LocalTime deliveryTime; // hora en la que se debe entregar el ´pedido (parametro)
     private int score = 0;  //puntaje que se le dio al pedido
+    private double totalPrice = 0;  
+    
     
     public Order() {
     }
@@ -68,6 +69,7 @@ public class Order {
         this.orderDate = LocalDate.now();
         this.state = OrederState.PROGRESS;
         this.deliveryTime = deliveryTime;
+        this.calculateTotalPrice();
     }
     
     public Business getBusiness() {
@@ -149,6 +151,14 @@ public class Order {
     public boolean hasQualification() {
         return this.getScore() != 0;
     }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
     
     public LocalTime calculateDeliveryTime() {
         LocalTime deliveryTime = this.orderItems.stream()
@@ -162,5 +172,10 @@ public class Order {
         }
         
     }
+    
+    public void calculateTotalPrice(){
+        this.totalPrice = this.orderItems.stream()
+                .map(item -> item.getPrice()).reduce( 0D, (price, price2) -> price + price2 );
+    } 
     
 }
