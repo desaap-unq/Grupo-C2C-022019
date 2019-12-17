@@ -210,12 +210,11 @@ public class Menu implements Serializable {
         if (quantity == 1) {
             return this.getPrice();
         } else {
-//            if (quantity >= this.minimumQuantityTwo) {
-//                return quantity * minimumQuantityPriceTwo;
-//            } else {
-//                return quantity * minimumQuantityPrice;
-//            }
-            return this.getPrice()* quantity;
+            if (quantity >= this.minimumQuantityTwo) {
+                return quantity * minimumQuantityPriceTwo;
+            } else {
+                return quantity * minimumQuantityPrice;
+            }
         }
     }
 
