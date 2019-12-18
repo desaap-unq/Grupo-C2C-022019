@@ -1,5 +1,6 @@
 package com.unq.ViandasYaGrupoC2C022019.webservice;
 
+import com.unq.ViandasYaGrupoC2C022019.aspects.LogExecutionServiceAndRepository;
 import com.unq.ViandasYaGrupoC2C022019.aspects.LogExecutionTime;
 import com.unq.ViandasYaGrupoC2C022019.aspects.LogExecutionTimeAspectAnnotation;
 import com.unq.ViandasYaGrupoC2C022019.dto.BusinessDto;
@@ -25,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableAutoConfiguration
 public class BusinessController {
 	
-	static Logger logger = LoggerFactory.getLogger(LogExecutionTimeAspectAnnotation.class);
+	static Logger logger = LoggerFactory.getLogger(LogExecutionServiceAndRepository.class);
 
     @Autowired
     BusinessService businessService;
@@ -40,6 +41,7 @@ public class BusinessController {
 
     @GetMapping("/search/{food}")
     public List<BusinessDto> findByBussinessName(@PathVariable String food) {
+    	logger.info("/////// Inside findBusinessName() method");
         return businessService.findByCategory(food);
     }
     
