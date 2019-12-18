@@ -5,7 +5,9 @@ before_cache:
 before_install: 
   - "sudo apt-get install jq"
   - "wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url)"
-cache: ~
+cache: 
+  directories: 
+    - $HOME/.m2
 deploy: 
   - 
     api-key: c399f4fc-b99c-45a9-baae-61dc1c27349f
@@ -13,8 +15,6 @@ deploy:
     provider: heroku
     skip_cleanup: true
     true: develop
-directories: 
-  - $HOME/.m2
 dist: trusty
 install: 
   - "mvn clean install -Dmaven.compiler.target=1.8 -Dmaven.compiler.source=1.8"
