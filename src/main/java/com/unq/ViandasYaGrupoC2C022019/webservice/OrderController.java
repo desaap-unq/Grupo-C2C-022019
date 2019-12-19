@@ -1,5 +1,6 @@
 package com.unq.ViandasYaGrupoC2C022019.webservice;
 
+import com.unq.ViandasYaGrupoC2C022019.aspects.LogExecutionTime;
 import com.unq.ViandasYaGrupoC2C022019.dto.OrderDto;
 import com.unq.ViandasYaGrupoC2C022019.model.Order;
 import com.unq.ViandasYaGrupoC2C022019.service.OrderService;
@@ -22,6 +23,7 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
+    @LogExecutionTime
     @PostMapping("")
     public Order createOrder(@RequestBody OrderDto orderDto) {
         
